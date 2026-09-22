@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TrioEdX — Interactive Prototype v50 (announcements + date picker)</title>
+<title>TrioEdX — Interactive Prototype v52 (reviews, both sides)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -2069,11 +2069,256 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
 .an-form-err{display:none;background:#fdeceb;border:1px solid #f3cdc9;border-radius:9px;padding:10px 13px;
   font-size:12.5px;color:#8a1c14;margin:0 0 12px;}
 
+
+/* ══════════════════════════════════════════════════════════════
+   v51 — ASSIGNMENTS · ANALYTICS · the Home range pill
+════════════════════════════════════════════════════════════════ */
+
+/* --- the shared picker, mounted on a pill instead of an icon --- */
+.dr-pop.left{right:auto;left:0;}
+.td-chip.on{border-color:var(--tnb-primary);color:var(--tnb-primary);background:var(--tnb-light);font-weight:700;}
+
+/* --- Home: the range summary card --- */
+.td-range-card{background:#fff;border:1px solid var(--tnb-gray-200);border-radius:14px;padding:0;
+  margin:0 0 20px;overflow:hidden;}
+.td-range-note{font-size:12px;color:var(--tnb-gray-500);padding:12px 18px 0;margin:0;line-height:1.6;}
+.td-range-note b{color:var(--tnb-gray-700);}
+
+/* --- Assignments --- */
+.as-title{font-size:13.5px;font-weight:700;color:var(--tnb-dark);margin:0 0 5px;line-height:1.5;}
+.as-meta{font-size:12px;color:var(--tnb-gray-500);margin:0 0 3px;}
+.as-meta b{color:var(--tnb-gray-700);font-weight:600;}
+.as-meta.dim{color:var(--tnb-gray-300);}
+.as-when{font-size:12.5px;color:var(--tnb-gray-700);margin:0 0 6px;}
+.as-dim{color:var(--tnb-gray-500);}
+.as-late{background:#fdeceb;color:#8a1c14;font-size:10.5px;font-weight:700;border-radius:5px;padding:2px 5px;}
+.as-linkbtn{background:none;border:none;padding:0;font-family:var(--font-body);font-size:12px;font-weight:700;
+  color:var(--tnb-primary);cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
+.as-linkbtn:hover{color:#8d1c38;}
+.as-pill{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:4px 10px;
+  white-space:nowrap;}
+.as-pill.graded{background:#e6f6ec;color:#12693a;}
+.as-pill.pending{background:#fdf3dc;color:#7a5a12;}
+.as-pill.missing{background:var(--tnb-gray-50);color:var(--tnb-gray-500);border:1px solid var(--tnb-gray-200);}
+.qz-ring.empty span{color:var(--tnb-gray-300);font-weight:700;}
+
+/* --- Analytics: tab strip --- */
+.ana-tabs{display:flex;gap:4px;flex-wrap:wrap;background:#fff;border:1px solid var(--tnb-gray-200);
+  border-radius:14px;padding:7px;margin:0 0 20px;}
+.ana-tab{background:none;border:none;border-radius:9px;font-family:var(--font-body);font-size:13px;
+  font-weight:600;color:var(--tnb-gray-700);padding:10px 17px;cursor:pointer;}
+.ana-tab:hover{background:var(--tnb-gray-50);}
+.ana-tab.on{background:var(--tnb-light);color:var(--tnb-primary);font-weight:700;}
+
+/* --- Analytics: notes --- */
+.ana-note{background:var(--tnb-gray-50);border-left:3px solid var(--tnb-gray-300);border-radius:0 10px 10px 0;
+  font-size:12.5px;color:var(--tnb-gray-700);line-height:1.75;padding:13px 16px;margin:0 0 20px;}
+.ana-note b{color:var(--tnb-dark);}
+.ana-note.amber{background:#fffaf0;border-left-color:#e0a92a;}
+
+/* --- Analytics: Overview stat trio --- */
+.ana-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 20px;}
+@media(max-width:860px){.ana-stat-grid{grid-template-columns:1fr;}}
+.ana-stat{background:#fff;border:1px solid var(--tnb-gray-200);border-radius:14px;padding:18px 20px;
+  display:flex;align-items:center;gap:15px;}
+.ana-stat-ic{width:46px;height:46px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:21px;}
+.ana-stat-ic.courses{background:#eef2ff;}
+.ana-stat-ic.students{background:#e6f6ec;}
+.ana-stat-ic.reviews{background:#fdf3dc;}
+.ana-stat-num{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--tnb-dark);
+  margin:0;line-height:1.1;}
+.ana-stat-lab{font-size:13px;font-weight:700;color:var(--tnb-gray-700);margin:3px 0 0;}
+.ana-stat-sub{font-size:11.5px;color:var(--tnb-gray-500);margin:2px 0 0;}
+
+/* --- Analytics: the Earnings Graph card --- */
+.ana-card-head{padding:17px 20px;border-bottom:1px solid var(--tnb-gray-200);}
+.ana-card-head h3{font-size:14.5px;font-weight:700;color:var(--tnb-dark);margin:0;}
+.ana-seg-row{display:flex;align-items:center;gap:10px;padding:14px 20px;flex-wrap:wrap;}
+.ana-segs{display:flex;gap:4px;}
+.ana-seg-tools{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.ana-seg{background:none;border:none;border-radius:8px;font-family:var(--font-body);font-size:12.5px;
+  font-weight:600;color:var(--tnb-gray-700);padding:8px 16px;cursor:pointer;}
+.ana-seg:hover{background:var(--tnb-gray-50);}
+.ana-seg.on{background:var(--tnb-light);color:var(--tnb-primary);font-weight:700;}
+.ana-cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border-top:1px solid var(--tnb-gray-200);}
+.ana-cell{padding:15px 20px;border-right:1px solid var(--tnb-gray-200);}
+.ana-cell:last-child{border-right:none;}
+.ana-cell.hot{background:#fdf0f4;}
+.ana-cell-label{font-size:11.5px;font-weight:700;color:var(--tnb-gray-500);margin:0 0 6px;}
+.ana-cell-val{font-family:var(--font-display);font-size:19px;font-weight:800;color:var(--tnb-dark);margin:0;}
+.ana-cell-sub{font-size:11px;color:var(--tnb-gray-500);margin:3px 0 0;}
+.ana-chart-wrap{padding:18px 20px 20px;border-top:1px solid var(--tnb-gray-200);}
+.ana-chart{width:100%;height:auto;display:block;}
+.ana-chart-empty p{font-size:12.5px;color:var(--tnb-gray-500);line-height:1.7;margin:12px 0 0;}
+.ana-chart-empty b{color:var(--tnb-gray-700);}
+
+/* --- Analytics: tables --- */
+.ana-table{width:100%;border-collapse:collapse;}
+.ana-table th{text-align:left;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;
+  color:var(--tnb-gray-500);background:var(--tnb-gray-50);padding:12px 18px;
+  border-bottom:1px solid var(--tnb-gray-200);white-space:nowrap;}
+.ana-table td{padding:14px 18px;border-bottom:1px solid var(--tnb-gray-200);vertical-align:middle;font-size:13px;
+  color:var(--tnb-gray-700);}
+.ana-table tr:last-child td{border-bottom:none;}
+.ana-table .ana-num{text-align:right;white-space:nowrap;}
+.ana-table.stmt td{vertical-align:top;}
+.ana-course-cell{display:flex;align-items:center;gap:13px;min-width:0;}
+.ana-thumb{width:74px;height:46px;flex-shrink:0;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;text-align:center;font-size:8.5px;font-weight:700;color:#fff;padding:4px;
+  line-height:1.25;overflow:hidden;}
+.ana-course-title{font-size:13px;font-weight:700;color:var(--tnb-primary);margin:0;line-height:1.45;}
+.ana-course-meta{font-size:11.5px;color:var(--tnb-gray-500);margin:4px 0 0;}
+.ana-course-meta b{color:var(--tnb-gray-700);}
+.ana-learners{display:inline-block;font-size:13px;font-weight:700;color:var(--tnb-primary);}
+.ana-rating{background:#fdf3dc;color:#7a5a12;font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;
+  white-space:nowrap;}
+.ana-bd{font-size:11.5px;color:var(--tnb-gray-500);}
+.ana-bd span{display:block;margin:0 0 4px;}
+.ana-bd b{color:var(--tnb-gray-700);font-weight:700;}
+.ana-earn{font-size:15px;font-weight:800;color:#12693a;margin:0;}
+.ana-share{font-size:15px;font-weight:800;color:var(--tnb-primary);margin:0;}
+.ana-stu{display:flex;align-items:center;gap:12px;}
+.ana-av{width:38px;height:38px;flex-shrink:0;border-radius:50%;background:var(--tnb-light);
+  color:var(--tnb-primary);font-size:12.5px;font-weight:800;display:flex;align-items:center;
+  justify-content:center;}
+.ana-stu-name{font-size:13px;font-weight:700;color:var(--tnb-dark);margin:0;}
+.ana-stu-mail{font-size:12px;color:#2f6fd0;margin:2px 0 0;}
+
+/* --- Analytics: the six money cards --- */
+.ana-money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 20px;}
+@media(max-width:940px){.ana-money-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:620px){.ana-money-grid{grid-template-columns:1fr;}}
+.ana-money{background:#fff;border:1px solid var(--tnb-gray-200);border-radius:14px;padding:18px 20px;}
+.ana-money-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;}
+.ana-money-head span{font-size:13px;font-weight:700;color:var(--tnb-gray-700);}
+.ana-money-head i{font-size:15px;font-style:normal;width:30px;height:30px;border-radius:9px;display:flex;
+  align-items:center;justify-content:center;}
+.ana-money-num{font-family:var(--font-display);font-size:25px;font-weight:800;margin:0;line-height:1.1;}
+.ana-money-sub{font-size:11.5px;color:var(--tnb-gray-500);margin:6px 0 0;}
+.ana-money-num.green,.ana-money-head i.green{color:#12693a;}
+.ana-money-num.maroon,.ana-money-head i.maroon{color:var(--tnb-primary);}
+.ana-money-num.purple,.ana-money-head i.purple{color:#6d3bd4;}
+.ana-money-num.cyan,.ana-money-head i.cyan{color:#0e7490;}
+.ana-money-num.pink,.ana-money-head i.pink{color:#c2255c;}
+.ana-money-num.amber,.ana-money-head i.amber{color:#a16207;}
+.ana-money-head i.green{background:#e6f6ec;}
+.ana-money-head i.maroon{background:var(--tnb-light);}
+.ana-money-head i.purple{background:#f1ebfd;}
+.ana-money-head i.cyan{background:#e0f4f8;}
+.ana-money-head i.pink{background:#fdeaf1;}
+.ana-money-head i.amber{background:#fdf3dc;}
+
+/* --- Analytics: Export --- */
+.ana-export{display:flex;align-items:center;gap:30px;flex-wrap:wrap;padding:30px 32px;}
+.ana-export-text{flex:1;min-width:260px;}
+.ana-export-text h3{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--tnb-dark);
+  margin:0 0 10px;line-height:1.3;}
+.ana-export-text p{font-size:13.5px;color:var(--tnb-gray-500);margin:0 0 18px;}
+.ana-export-note{font-size:11.5px;color:var(--tnb-gray-500);margin:14px 0 0;line-height:1.7;max-width:460px;}
+.ana-export-note b{color:var(--tnb-gray-700);}
+.ana-export-art{flex:0 0 auto;background:#fdf0f4;border-radius:14px;padding:20px 28px;display:flex;
+  align-items:center;justify-content:center;}
+@media(max-width:700px){.ana-export-art{display:none;}}
+
+
+/* ══════════════════════════════════════════════════════════════
+   v52 — REVIEWS, both sides
+════════════════════════════════════════════════════════════════ */
+
+/* --- the review card, matching the dev card's order --- */
+.rv-card{background:#fff;border:1px solid var(--tnb-gray-200);border-radius:14px;margin:0 0 16px;overflow:hidden;}
+.rv-card-top{display:flex;align-items:center;gap:9px;padding:15px 20px 0;flex-wrap:wrap;}
+.rv-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;border-radius:7px;
+  padding:5px 10px;white-space:nowrap;}
+.rv-chip.course{background:var(--tnb-light);color:var(--tnb-primary);}
+.rv-chip.lesson{background:#e6f6ec;color:#12693a;}
+.rv-chip.class{background:#eef2ff;color:#3b42a8;}
+.rv-card .rv-id{flex:0 0 auto;margin-left:auto;font-size:11px;color:var(--tnb-gray-300);font-weight:700;
+  min-width:0;}
+.rv-pub{font-size:11px;font-weight:700;color:#12693a;background:#e6f6ec;border-radius:999px;padding:4px 10px;}
+.rv-subject{font-size:15px;font-weight:700;color:var(--tnb-dark);margin:11px 20px 5px;line-height:1.5;}
+.rv-on{font-size:12px;color:var(--tnb-gray-500);margin:0 20px 14px;}
+.rv-edited{background:var(--tnb-gray-50);border:1px solid var(--tnb-gray-200);border-radius:5px;padding:1px 6px;
+  font-size:10.5px;font-weight:700;color:var(--tnb-gray-500);}
+.rv-body{border-top:1px solid var(--tnb-gray-200);padding:16px 20px 18px;}
+.rv-body .rv-stars{margin:0 0 11px;}
+.rv-body .rv-text{margin:0 0 15px;}
+.rv-who{display:flex;align-items:center;gap:11px;}
+.rv-role{font-size:11.5px;color:var(--tnb-gray-500);margin:2px 0 0;}
+.rv-stars.big{font-size:19px;letter-spacing:2px;}
+
+/* --- the tutor's reply --- */
+.rv-reply{background:var(--tnb-gray-50);border-left:3px solid var(--tnb-primary);border-radius:0 10px 10px 0;
+  padding:12px 15px;margin:15px 0 0;}
+.rv-reply-head{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:var(--tnb-dark);
+  margin:0 0 7px;flex-wrap:wrap;}
+.rv-reply-head span{font-weight:600;color:var(--tnb-gray-500);}
+.rv-reply-head .as-linkbtn{margin-left:auto;font-size:11.5px;}
+.rv-reply-head .as-linkbtn + .as-linkbtn{margin-left:0;}
+.rv-reply-text{font-size:12.5px;color:var(--tnb-gray-700);line-height:1.75;margin:0;}
+.rv-acts{display:flex;align-items:center;gap:9px;margin:15px 0 0;flex-wrap:wrap;}
+.rv-await{font-size:11.5px;color:var(--tnb-gray-500);}
+.rv-quote{background:var(--tnb-gray-50);border-radius:10px;padding:13px 15px;margin:0 0 15px;}
+.rv-quote p{font-size:12.5px;color:var(--tnb-gray-700);line-height:1.7;margin:0;}
+.rv-quote .rv-stars{margin:0 0 7px;}
+.rv-quote-who{font-size:11.5px;color:var(--tnb-gray-500);margin:8px 0 0 !important;}
+
+/* --- the summary card --- */
+.rv-summary{background:#fff;border:1px solid var(--tnb-gray-200);border-radius:14px;padding:22px 24px;
+  margin:0 0 20px;display:grid;grid-template-columns:150px 1fr 1fr;gap:26px;align-items:center;}
+@media(max-width:900px){.rv-summary{grid-template-columns:1fr;gap:20px;}}
+.rv-sum-big{text-align:center;}
+.rv-sum-num{font-family:var(--font-display);font-size:44px;font-weight:800;color:var(--tnb-dark);
+  margin:0;line-height:1;}
+.rv-sum-sub{font-size:11.5px;color:var(--tnb-gray-500);margin:7px 0 0;}
+.rv-bars{display:flex;flex-direction:column;gap:6px;}
+.rv-bar-row{display:flex;align-items:center;gap:10px;}
+.rv-bar-lab{font-size:11.5px;font-weight:700;color:var(--tnb-gray-500);width:26px;flex-shrink:0;}
+.rv-bar{flex:1;height:8px;border-radius:99px;background:var(--tnb-gray-50);
+  border:1px solid var(--tnb-gray-200);overflow:hidden;}
+.rv-bar i{display:block;height:100%;background:#f5b301;}
+.rv-bar-n{font-size:11.5px;font-weight:700;color:var(--tnb-gray-700);width:16px;text-align:right;flex-shrink:0;}
+.rv-types{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.rv-type-stat{background:var(--tnb-gray-50);border-radius:10px;padding:11px 12px;text-align:center;}
+.rv-type-lab{font-size:10.5px;font-weight:700;color:var(--tnb-gray-500);margin:0 0 5px;}
+.rv-type-val{font-size:15px;font-weight:800;color:var(--tnb-dark);margin:0;}
+.rv-type-n{font-size:10.5px;color:var(--tnb-gray-500);margin:3px 0 0;}
+.rv-pill-btn{background:#fff;border:1px solid var(--tnb-gray-300);border-radius:999px;
+  font-family:var(--font-body);font-size:12.5px;font-weight:700;color:var(--tnb-gray-700);
+  padding:9px 15px;cursor:pointer;white-space:nowrap;}
+.rv-pill-btn:hover{border-color:var(--tnb-primary);color:var(--tnb-primary);}
+.rv-pill-btn.on{background:var(--tnb-light);border-color:var(--tnb-primary);color:var(--tnb-primary);}
+
+/* --- student: the star picker and the to-do list --- */
+.sv-star-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.sv-star{background:none;border:none;cursor:pointer;font-size:27px;line-height:1;padding:0 1px;
+  color:var(--tnb-gray-300);}
+.sv-star:hover{color:#f5b301;}
+.sv-star.on{color:#f5b301;}
+.sv-stars-lab{font-size:12.5px;font-weight:700;color:var(--tnb-gray-500);}
+.sv-words{font-size:11.5px;color:var(--tnb-gray-500);margin:7px 0 0;font-weight:600;}
+.sv-words.ok{color:#12693a;}
+.sv-conseq{margin:0 0 15px;padding:0 0 0 20px;}
+.sv-conseq li{font-size:12.5px;color:var(--tnb-gray-700);line-height:1.75;margin:0 0 6px;}
+.sv-todo-row{background:#fff;border:1px solid var(--tnb-gray-200);border-radius:12px;padding:14px 18px;
+  margin:0 0 12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sv-todo-title{flex:1;min-width:190px;font-size:13.5px;font-weight:700;color:var(--tnb-dark);line-height:1.5;}
+.sv-who{font-size:12px;color:var(--tnb-gray-500);line-height:1.7;margin:0 0 18px;}
+.sv-who b{color:var(--tnb-gray-700);}
+.sv-sec{display:flex;align-items:center;gap:10px;margin:0 0 13px;}
+.sv-sec h2{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--tnb-dark);margin:0;}
+.sv-sec-n{background:var(--tnb-light);color:var(--tnb-primary);font-size:11.5px;font-weight:800;
+  border-radius:999px;padding:3px 10px;}
+.pc-btn.danger{background:#b3261e;border-color:#b3261e;color:#fff;}
+.pc-btn.danger:hover{background:#8f1e17;color:#fff;}
+
 </style>
 </head>
 <body>
 
-<div class="wf-ribbon">Interactive Prototype <b>v50</b> — TrioEdX — <b>announcements + date picker</b>
+<div class="wf-ribbon">Interactive Prototype <b>v52</b> — TrioEdX — <b>reviews, both sides</b>
   <span class="wf-viewas">View as:
     <button type="button" class="view-as-btn on" data-role="guest" onclick="setViewAs('guest')">Guest</button>
     <button type="button" class="view-as-btn" data-role="student" onclick="setViewAs('student')">Student</button>
@@ -2083,11 +2328,16 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
   <span class="wf-viewas"><button type="button" onclick="toggleChangeNotes(this)">Hide change notes</button></span>
   <span class="wf-jump"><select id="jumpNav" onchange="if(this.value) showScreen(this.value); this.value='';">
     <option value="">Jump to screen…</option>
-    <option value="v361-changes">★ v50 — what changed (index)</option>
+    <option value="v361-changes">★ v52 — what changed (index)</option>
     <option value="admin-home">v44 — Admin console (placeholder)</option>
-    <option value="tutor-announce">★ v50 — Tutor: Announcements</option>
+    <option value="tutor-reviews">★ v52 — Tutor: Reviews</option>
+    <option value="student-reviews">★ v52 — Student: My Reviews (write one)</option>
+    <option value="tutor-analytics">v51 — Tutor: Analytics (6 tabs)</option>
+    <option value="tutor-assign">v51 — Tutor: Assignments</option>
+    <option value="tutor-home">v51 — Tutor: Home (live date range)</option>
+    <option value="tutor-announce">v50 — Tutor: Announcements</option>
     <option value="tutor-quizzes">v49 — Tutor: Quiz Attempts</option>
-    <option value="tutor-home">v49 — Tutor: Home (top courses + reviews)</option>
+
     <option value="tutor-courses">v48 — Tutor: Courses (dev match)</option>
     <option value="tutor-profile">v47 — Tutor: My Profile (editor)</option>
     <option value="admin-profiles">★ v47 — Admin: Profile changes</option>
@@ -2755,13 +3005,14 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
 <!-- ============ v36.1 — CHANGE INDEX ============ -->
 <div class="screen" id="screen-v361-changes">
   <div class="chg-wrap">
-    <p class="tnb-eyebrow">Interactive Prototype v50</p>
-    <h1 style="font-family:var(--font-display);font-size:28px;color:var(--tnb-dark);margin:0 0 6px;">Announcements &amp; the date picker &mdash; what changed</h1>
+    <p class="tnb-eyebrow">Interactive Prototype v52</p>
+    <h1 style="font-family:var(--font-display);font-size:28px;color:var(--tnb-dark);margin:0 0 6px;">Reviews, both sides &mdash; what changed</h1>
     <p style="font-size:14px;color:var(--tnb-gray-500);margin:0 0 8px;max-width:780px;line-height:1.7;">
-      Built on <b>v49</b>. Announcements becomes a real screen with working compose, edit and delete, and the
-      calendar icon that v49 treated as decorative is now the full date-range picker your screenshots show &mdash;
-      built once and shared by both pages. <b>Three</b> tutor sidebar placeholders remain: Assignments, Certificates
-      and Analytics. Every row below is clickable.</p>
+      Built on <b>v51</b>. Reviews stops being four cards on Home and becomes a <b>system</b>: a tutor page with
+      filters and public replies, a student page where a review can actually be <b>written</b> &mdash; closing a gap
+      v49 flagged against itself &mdash; and a model where a <b>1-on-1 lesson</b> or a <b>group class</b> can be
+      reviewed, not just a course. It is all one array, so a review written on one screen moves the rating on three
+      others. <b>One</b> tutor sidebar placeholder remains: Certificates. Every row below is clickable.</p>
     <p style="font-size:13px;color:var(--tnb-gray-500);margin:0 0 24px;max-width:780px;line-height:1.7;">
       Use <b>View as: Guest / Student / Tutor</b> in the top ribbon to see the signed-out and signed-in header states,
       and <b>Hide change notes</b> to see the screens clean.</p>
@@ -4886,6 +5137,198 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
   </div>
 </div>
 
+<!-- ============ v52 — TUTOR: REVIEWS ============ -->
+<div class="screen" id="screen-tutor-reviews">
+  <div class="sd-shell">
+    <aside class="sd-sidebar" id="tdRvSidebar"></aside>
+    <main class="sd-main">
+      <div class="sd-topbar" id="tdRvTopbar"></div>
+      <div class="role-switch">
+        <div class="role-switch-text"><b>&#128218; Tutor workspace</b>
+          Tutor access includes your student access &mdash; switch without going back to the Home page.</div>
+        <button type="button" class="role-switch-btn" onclick="switchRole('student')">Switch to Student &rarr;</button>
+      </div>
+
+      <p class="v361-note"><b>v52 change &mdash; new screen.</b> Reviews had no page of its own: four of them sat in a
+        section on Home and a count sat on the Analytics Overview, and that was all.
+        <br><br><b>Two departures from your screenshot, both deliberate.</b> (1) Your screenshot is an <b>overlay</b>
+        &mdash; back arrow, close button, no sidebar. You asked for a page under the Tutor Dashboard, so this is a
+        full dashboard page with the shell and the Switch-to-Student band every other tutor page carries; the cards
+        themselves follow the screenshot exactly. (2) dev shows <b>2</b> reviews, both dated 13&nbsp;August. This has
+        <b>6</b>, because reviews now cover three things rather than one.
+        <br><br><b>Reviews now cover courses, 1-on-1 lessons and group classes</b>, as you asked. The lesson and class
+        reviews are not invented history &mdash; they attach to sessions this prototype has recorded as <i>taught</i>
+        since v46, in the tutor&rsquo;s own held-funds list. <b>Replying works</b>, one public reply per review, and
+        the seeded reply is on the 4-star review, which is the case a reply feature exists for.
+        <br><br><b>Your rating spans all three types now</b> &mdash; it is your rating, not the catalog&rsquo;s &mdash;
+        while a course&rsquo;s own rating still counts course reviews only, so no course is marked down for a lesson.
+        Everything derives from one array: write, edit, delete or reply and the Home stat card, the Analytics average
+        and the per-course ratings all move together.</p>
+
+      <div class="rv-summary" id="rvSummary"></div>
+
+      <div class="qz-bar">
+        <div class="qz-drop" id="rvTypeDrop">
+          <button type="button" class="qz-drop-btn accent" onclick="qzToggle('rvTypeDrop')">
+            <span id="rvTypeLabel">All types</span> <span class="chev">&#9662;</span></button>
+          <div class="qz-drop-menu" id="rvTypeMenu"></div>
+        </div>
+        <div class="qz-drop" id="rvStarDrop">
+          <button type="button" class="qz-drop-btn" onclick="qzToggle('rvStarDrop')">
+            <span id="rvStarLabel">All ratings</span> <span class="chev">&#9662;</span></button>
+          <div class="qz-drop-menu" id="rvStarMenu"></div>
+        </div>
+        <div class="qz-right">
+          <button type="button" class="rv-pill-btn" id="rvUnrepliedBtn" onclick="rvToggleUnreplied()"></button>
+        </div>
+      </div>
+
+      <div class="qz-bar2">
+        <div class="qz-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="rvSearch" placeholder="Search reviews, students or your replies&hellip;" oninput="rvRender()">
+        </div>
+        <div class="qz-right">
+          <span id="rvDateMount"></span>
+          <button type="button" class="qz-iconbtn" id="rvSortBtn" onclick="rvToggleSort()" title="Newest first">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4v16M8 20l-3-3M16 20V4M16 4l3 3"/></svg></button>
+        </div>
+      </div>
+
+      <div id="rvList"></div>
+      <div class="qz-empty" id="rvEmpty" style="display:none;"></div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ v52 — STUDENT: MY REVIEWS ============ -->
+<div class="screen" id="screen-student-reviews">
+  <div class="sd-shell">
+    <aside class="sd-sidebar" id="sdRevSidebar"></aside>
+    <main class="sd-main">
+      <div class="sd-topbar" id="sdRevTopbar"></div>
+
+      <p class="v361-note"><b>v52 change &mdash; new screen, closing a gap v49 flagged.</b> v49 shipped the
+        tutor&rsquo;s reviews section and noted in its own change index that <b>students had no way to write one</b>.
+        They do now.
+        <br><br><b>Entitlement is derived, not maintained.</b> What you can review comes from what this prototype
+        already knows you did &mdash; your enrolments, the 1-on-1 lessons taught to you, the cohort you sat in &mdash;
+        so nobody can review a course they never took, and nothing has to be kept in step by hand.
+        <br><br><b>Reviews publish immediately.</b> There is no moderation queue; that was an option and it was not
+        the one picked, so this says so plainly rather than implying a review is checked before it goes live. You can
+        edit or delete yours afterwards, and the tutor can reply in public.</p>
+
+      <div class="sd-book-head"><h1>&#11088; My Reviews</h1></div>
+      <p class="sd-book-sub">What you can review, and what you have written.</p>
+      <p class="sv-who" id="svWho"></p>
+
+      <div class="sv-sec"><h2>Ready to review</h2><span class="sv-sec-n" id="svTodoCount">0</span></div>
+      <div id="svTodo"></div>
+
+      <div class="sv-sec" style="margin-top:26px;"><h2>Your reviews</h2>
+        <span class="sv-sec-n" id="svMineCount">0</span></div>
+      <div id="svMine"></div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ v51 — TUTOR: ASSIGNMENTS ============ -->
+<div class="screen" id="screen-tutor-assign">
+  <div class="sd-shell">
+    <aside class="sd-sidebar" id="tdAsSidebar"></aside>
+    <main class="sd-main">
+      <div class="sd-topbar" id="tdAsTopbar"></div>
+      <div class="role-switch">
+        <div class="role-switch-text"><b>&#128218; Tutor workspace</b>
+          Tutor access includes your student access &mdash; switch without going back to the Home page.</div>
+        <button type="button" class="role-switch-btn" onclick="switchRole('student')">Switch to Student &rarr;</button>
+      </div>
+
+      <p class="v361-note"><b>v51 change &mdash; new screen.</b> Assignments was a &ldquo;not built&rdquo;
+        placeholder. This is the dev page: the course dropdown with its own <b>Search&nbsp;Course</b> box, a status
+        filter, search, the shared date-range picker and sort &mdash; over the empty state dev shows.
+        <br><br><b>The deliberate departure, and it is the opposite of the last three rounds.</b>
+        dev&rsquo;s Assignments page is <b>genuinely empty</b> &mdash; &ldquo;All Courses (0)&rdquo;, &ldquo;All
+        (0)&rdquo;, &ldquo;No Assignments Found!&rdquo;. Matching that exactly would have handed you four controls
+        with nothing to act on, so <b>six assignments are seeded</b> across the published courses. Every one names a
+        student who is really enrolled on that course, and no submission predates its own enrolment. dev&rsquo;s
+        empty state is still reachable &mdash; filter to any course without assignments, or search for something
+        that does not exist.
+        <br><br><b>Grading works.</b> Enter a mark and the row moves to Graded, the ring fills, and the status
+        filter recounts. Nothing is sent anywhere &mdash; the reminder button on an unsubmitted assignment says so.</p>
+
+      <div class="qz-bar">
+        <div class="qz-drop" id="asCourseDrop">
+          <button type="button" class="qz-drop-btn accent" onclick="qzToggle('asCourseDrop')">
+            <span id="asCourseLabel">All Courses (6)</span> <span class="chev">&#9662;</span></button>
+          <div class="qz-drop-menu" id="asCourseMenu"></div>
+        </div>
+        <div class="qz-right">
+          <div class="qz-drop" id="asStatusDrop">
+            <button type="button" class="qz-drop-btn" onclick="qzToggle('asStatusDrop')">
+              <span id="asStatusLabel">All (6)</span> <span class="chev">&#9662;</span></button>
+            <div class="qz-drop-menu right" id="asStatusMenu"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qz-bar2">
+        <div class="qz-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="asSearch" placeholder="Search assignments&hellip;" oninput="asRender()">
+        </div>
+        <div class="qz-right">
+          <span id="asDateMount"></span>
+          <button type="button" class="qz-iconbtn" id="asSortBtn" onclick="asToggleSort()" title="Newest first">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4v16M8 20l-3-3M16 20V4M16 4l3 3"/></svg></button>
+        </div>
+      </div>
+
+      <div class="td-card" style="padding:0 18px;overflow:hidden;">
+        <table class="sd-quiz-table">
+          <thead><tr><th>Assignment</th><th>Mark</th><th>Submitted</th><th>Status</th></tr></thead>
+          <tbody id="asBody"></tbody>
+        </table>
+      </div>
+      <div class="qz-empty" id="asEmpty" style="display:none;"></div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ v51 — TUTOR: ANALYTICS ============ -->
+<div class="screen" id="screen-tutor-analytics">
+  <div class="sd-shell">
+    <aside class="sd-sidebar" id="tdAnaSidebar"></aside>
+    <main class="sd-main">
+      <div class="sd-topbar" id="tdAnaTopbar"></div>
+      <div class="role-switch">
+        <div class="role-switch-text"><b>&#128218; Tutor workspace</b>
+          Tutor access includes your student access &mdash; switch without going back to the Home page.</div>
+        <button type="button" class="role-switch-btn" onclick="switchRole('student')">Switch to Student &rarr;</button>
+      </div>
+
+      <p class="v361-note"><b>v51 change &mdash; new screen, all six tabs.</b> Analytics was a &ldquo;not
+        built&rdquo; placeholder. Your six screenshots gave every tab, so every tab is built: <b>Overview</b>,
+        <b>Courses</b>, <b>Earnings</b>, <b>Statements</b>, <b>Students</b> and <b>Export</b> &mdash; no
+        &ldquo;coming soon&rdquo; panels behind the labels.
+        <br><br><b>Nothing on this screen is typed in.</b> Building it needed three things the prototype had never
+        written down: who the tutor&rsquo;s students actually are, how much content each course holds, and which
+        enrolments were paid for. All three now exist once and are derived everywhere &mdash; the assignment counts
+        on the Courses tab are counted from the Assignments page, and the money is run through the same revenue
+        engine the checkout and the agreement use.
+        <br><br><b>Why the totals differ from dev.</b> dev has 18 courses, 26 students and 2 reviews behind it; this
+        file has 12, 23 and 4. Borrowing dev&rsquo;s headline numbers would have made this page disagree with every
+        page behind it, so it counts what is really here and says so on each tab.
+        <br><br><b>And it surfaced two contradictions</b> that were already in the file &mdash; a quiz attempt in a
+        course with zero enrolments, and an approved refund for a course that is free and unpublished. The first is
+        fixed; the second is flagged on the Overview tab, because fixing it properly is your decision, not mine.</p>
+
+      <div class="ana-tabs" id="anaTabs"></div>
+      <div id="anaPanel"></div>
+    </main>
+  </div>
+</div>
+
 <!-- ============ v49 — TUTOR: QUIZ ATTEMPTS ============ -->
 <div class="screen" id="screen-tutor-quizzes">
   <div class="sd-shell">
@@ -5385,10 +5828,16 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
       </div>
 
       <div class="td-filter-row">
-        <button type="button" class="td-chip" onclick="alert('Wireframe only — this would change the reporting period (All Time / This Year / This Month).')">&#128197; All Time</button>
+        <span id="tdHomeDateMount"></span>
         <button type="button" class="td-icon-btn" onclick="alert('Wireframe only — this would open dashboard display settings.')">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#fff"/><circle cx="15" cy="12" r="2" fill="#fff"/><circle cx="8" cy="18" r="2" fill="#fff"/></svg>
         </button>
+      </div>
+
+
+      <div class="td-range-card">
+        <p class="td-range-note" id="tdRangeLabel"></p>
+        <div class="ana-cells" id="tdRangeCells"></div>
       </div>
 
       <div class="sd-stats-grid">
@@ -5435,8 +5884,11 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
           <path d="M10,177 C170,172 290,72 410,66 C530,72 650,172 810,177" fill="none" stroke="#1f8a4c" stroke-width="2"/>
           <text x="410" y="195" text-anchor="middle" font-size="11" fill="#9ca3af" font-family="DM Sans, sans-serif">2026</text>
         </svg>
-        <p class="td-chart-note">Illustrative shape &mdash; not computed from the prototype&rsquo;s order data. Wiring it to
-          the real ledger depends on scoping orders per tutor.</p>
+        <p class="td-chart-note"><b>The date range above does not reach this chart.</b> It is an illustrative
+          shape, not computed from order data, and a range cannot filter a drawing &mdash; saying so is better than
+          redrawing the same curve and implying it changed. The figures that <i>are</i> dated &mdash; the four in the
+          card at the top and the reviews at the bottom &mdash; do recount. For real earnings by month, see
+          <b>Analytics &rarr; Earnings</b>, which plots the order ledger.</p>
       </div>
 
       <div class="td-card">
@@ -5445,7 +5897,8 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
         <div class="td-bar-legend" id="tdCompletionLegend"></div>
         <p class="td-chart-note">52 enrolments broken down: 5 completed, 20 in progress, 27 inactive, 0 cancelled.
           The screenshot&rsquo;s legend added these to 104; this version keeps the same five labels but makes the
-          arithmetic add up.</p>
+          arithmetic add up. <b>The date range above does not reach this chart either</b> &mdash; completion is not
+          dated anywhere in this prototype. The real enrolment count, which is dated, is in the card at the top.</p>
       </div>
 
       <div class="td-card">
@@ -5466,10 +5919,12 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
       <div class="td-card">
         <div class="tp-card-head"><h3>Recent Student Reviews</h3>
           <span class="td-pill live" id="tpcAvg">&mdash;</span></div>
-        <p class="td-chart-note" style="margin:0 0 14px;"><b>v49 &mdash;</b> Illustrative reviews &mdash; no review data
-          existed anywhere in this prototype, and <b>students still have no way to write one</b>, which is a gap in its
-          own right. The rating on your stat card above is <b>computed from these reviews</b> rather than hardcoded, so
-          the two can never disagree.</p>
+        <p class="td-chart-note" style="margin:0 0 14px;"><b>v52 &mdash;</b> The most recent reviews across
+          <b>courses, 1-on-1 lessons and group classes</b>. The gap v49 flagged here &mdash; students having no way to
+          write a review &mdash; is <b>closed</b>: they write them from <b>My Reviews</b> in the student dashboard, and
+          anything written there appears here. The rating on your stat card above is <b>computed from these reviews</b>
+          rather than hardcoded, so the two can never disagree.
+          <a class="sd-profile-cta" onclick="showScreen('tutor-reviews')">Open Reviews &rarr;</a></p>
         <div id="tpcReviews"></div>
       </div>
 
@@ -5606,7 +6061,7 @@ body:not(.tutor-live) .tutor-apply-live{display:none !important;}
         <h2 id="tdSoonTitle">Announcements</h2>
         <p>This item exists on the dev.trioedx.com teacher dashboard, so it is kept in the sidebar for parity &mdash;
           but there is nothing behind it anywhere in this prototype yet.</p>
-        <p>Assignments, Certificates and Analytics are all Tutor&nbsp;LMS features.
+        <p>Certificates is a Tutor&nbsp;LMS feature.
           They need their own requirement pass before they can be drawn.</p>
       </div>
     </main>
@@ -5894,6 +6349,10 @@ function showScreen(id){
   if (full === 'screen-tutor-home' && typeof renderTutorHome === 'function') renderTutorHome();
   if (full === 'screen-tutor-quizzes' && typeof renderTutorQuizzes === 'function') renderTutorQuizzes();
   if (full === 'screen-tutor-announce' && typeof renderTutorAnnounce === 'function') renderTutorAnnounce();
+  if (full === 'screen-tutor-assign' && typeof renderTutorAssign === 'function') renderTutorAssign();
+  if (full === 'screen-tutor-reviews' && typeof renderTutorReviews === 'function') renderTutorReviews();
+  if (full === 'screen-student-reviews' && typeof renderStudentReviews === 'function') renderStudentReviews();
+  if (full === 'screen-tutor-analytics' && typeof renderTutorAnalytics === 'function') renderTutorAnalytics();
   if (full === 'screen-admin-home' && typeof renderAdminHome === 'function') renderAdminHome();
   if (typeof sdRemount === 'function') sdRemount(full);
   if (full === 'screen-tutor-courses' && typeof renderTutorCourses === 'function') renderTutorCourses();
@@ -6355,7 +6814,11 @@ function tutorLifetimeEarnings(){
   var mine = (typeof ordersForTutor === 'function')
     ? ordersForTutor(typeof currentTutorId === 'function' ? currentTutorId() : '') : [];
   var extra = mine.reduce(function(t, o){ return t + (o.payeeEarn || 0); }, 0);
-  return PAYOUT_BASELINE.lifetime + extra;
+  /* v51 — course sales now have a ledger. Leaving it out would have made this
+     card read $2180.00 while Analytics -> Earnings read the course total, with
+     nothing on either screen explaining the gap. */
+  var courses = (typeof tutorCourseLedgerEarnings === 'function') ? tutorCourseLedgerEarnings() : 0;
+  return PAYOUT_BASELINE.lifetime + extra + courses;
 }
 
 /* ── D: sidebar, mirroring the screenshot, in three groups ── */
@@ -6366,13 +6829,14 @@ var TUTOR_NAV = [
     { key:'courses',       label:'Courses',       icon:'courses',     screen:'tutor-courses' },
     { key:'announcements', label:'Announcements', icon:'inbox',       screen:'tutor-announce' },
     { key:'quiz',          label:'Quiz Attempts', icon:'check',       screen:'tutor-quizzes' },
-    { key:'assignments',   label:'Assignments',   icon:'notes',       soon:'Assignments' }
+    { key:'assignments',   label:'Assignments',   icon:'notes',       screen:'tutor-assign' },
+    { key:'reviews',       label:'Reviews',       icon:'star',        screen:'tutor-reviews' }
   ]},
   { group:'Teaching', items:[
     { key:'discussions',   label:'Discussions',   icon:'discussions', screen:'tutor-discussions' },
     { key:'live',          label:'Live Classes',  icon:'play',        screen:'tutor-live' },
     { key:'certificate',   label:'Certificate',   icon:'certificate', soon:'Certificates' },
-    { key:'analytics',     label:'Analytics',     icon:'receipt',     soon:'Analytics' },
+    { key:'analytics',     label:'Analytics',     icon:'receipt',     screen:'tutor-analytics' },
     { key:'slots',         label:'Booking Slots', icon:'calendar',    screen:'tutor-slots' },
     { key:'bookings',      label:'My Bookings',   icon:'bookings',    screen:'tutor-bookings' }
   ]},
@@ -6432,6 +6896,9 @@ function tdSoon(title, key){
 function renderTutorHome(){
   tdMountShell('screen-tutor-home', 'home');
   if (typeof tutorSyncRating === 'function') tutorSyncRating();   /* v49 — rating comes from the reviews */
+  /* v51 — the All Time pill is the shared picker now, and the card below it recounts. */
+  if (typeof tdMountHomePicker === 'function') tdMountHomePicker();
+  if (typeof tdRenderRange === 'function') tdRenderRange();
   if (typeof tpcRender === 'function') tpcRender();
   var set = function(id, v){ var e = document.getElementById(id); if (e) e.textContent = v; };
   set('tdStatEarnings', '$' + tutorLifetimeEarnings().toFixed(2));
@@ -8150,25 +8617,228 @@ function renderTutorCourses(){
 /* ── Reviews. None existed anywhere in this prototype, and no student
    can write one yet — that path is still unbuilt. Seeded against the
    catalog's own titles and this prototype's own student names. ── */
+/* ════════════════════════════════════════════════════════════
+   v52 — THE REVIEW MODEL
+   ------------------------------------------------------------
+   One array, three types. TUTOR_REVIEWS keeps its name because
+   six places already read it; what changes is that each review
+   now carries a type, an id, a reply slot and a subject, so a
+   1-on-1 lesson or a group class can be reviewed without a
+   second array to keep in sync.
+
+   Nothing here is invented history. The lesson and class reviews
+   attach to sessions the prototype already recorded as taught —
+   HELD_FUNDS has been listing them since v46 — rather than to
+   bookings conjured up for this screen. The four course reviews
+   keep their original text word for word.
+
+   The tutor's headline rating now spans all three types, which is
+   what you asked for: it is the tutor's rating, not the
+   catalog's. Per-course ratings still count course reviews only,
+   so a course is never marked down for a lesson.
+════════════════════════════════════════════════════════════ */
+
+var REVIEW_TYPES = [
+  { key:'course', label:'Course' },
+  { key:'lesson', label:'1-on-1 lesson' },
+  { key:'class',  label:'Group class' }
+];
+function reviewTypeLabel(t){
+  for (var i = 0; i < REVIEW_TYPES.length; i++){ if (REVIEW_TYPES[i].key === t) return REVIEW_TYPES[i].label; }
+  return 'Course';
+}
+
 var TUTOR_REVIEWS = [
-  { student:'Student1 TrioEdX', initials:'ST', courseId:3, stars:5, daysAgo:34,
+  { id:'RV-3006', type:'class', courseId:null, refId:1,
+    subject:'Conversational Spanish Culture Club',
+    student:'Priya Sharma', initials:'PS', stars:4, daysAgo:5, reply:null,
+    text:'Four sessions in a group of four is the right size — everyone spoke every week, which never happens in a big class. Docked a star because the last session ran short and we did not get the full open-conversation hour.' },
+  { id:'RV-3005', type:'lesson', courseId:null, refId:'HF-3',
+    subject:'1-on-1 lesson — Tajweed',
+    student:'Student2 TrioEdX', initials:'ST', stars:4, daysAgo:23, reply:null,
+    text:'Patient and precise on pronunciation, and happy to go back over the same letter until it clicked. I would have liked something written to practise with between lessons.' },
+  { id:'RV-3004', type:'course', courseId:3, refId:null, subject:null,
+    student:'Student1 TrioEdX', initials:'ST', stars:5, daysAgo:34, reply:null,
     text:'A beautiful and insightful course that deepens your understanding of Salat beyond the physical actions of prayer. It brings real meaning to the words we recite and encourages more focus and reflection during daily prayers. Clear, accessible and spiritually enriching.' },
-  { student:'Alex Morgan', initials:'AM', courseId:7, stars:5, daysAgo:38,
+  { id:'RV-3003', type:'course', courseId:7, refId:null, subject:null,
+    student:'Alex Morgan', initials:'AM', stars:5, daysAgo:38, reply:null,
     text:'Great practical course with clear explanations and useful hands-on examples. It made Git and GitHub workflows, especially push and pull, easy to understand. Highly recommended.' },
-  { student:'Priya Sharma', initials:'PS', courseId:8, stars:5, daysAgo:52,
-    text:'I came in able to open a spreadsheet and left with a published report my department now uses every week. The hospital data examples made the difference — practising on someone else\u2019s sample set never worked for me.' },
-  { student:'Daniel Okafor', initials:'DO', courseId:5, stars:4, daysAgo:61,
+  { id:'RV-3002', type:'course', courseId:8, refId:null, subject:null,
+    student:'Priya Sharma', initials:'PS', stars:5, daysAgo:52, reply:null,
+    text:'I came in able to open a spreadsheet and left with a published report my department now uses every week. The hospital data examples made the difference — practising on someone else’s sample set never worked for me.' },
+  { id:'RV-3001', type:'course', courseId:5, refId:null, subject:null,
+    student:'Daniel Okafor', initials:'DO', stars:4, daysAgo:61,
+    /* One reply is seeded, and deliberately on the critical review — that is
+       the case a reply feature exists for. */
+    reply:{ text:'Fair, and thank you for saying it plainly. I have added four more worked examples to the later sections; they are live now, so do take another look — you keep access.',
+            daysAgo:58 },
     text:'Genuinely useful for getting past copy-pasted prompts into something repeatable. Docked a star only because I wanted more worked examples in the later sections; the fundamentals are very well covered.' }
 ];
-function reviewAverage(){
-  if (!TUTOR_REVIEWS.length) return 0;
-  var t = TUTOR_REVIEWS.reduce(function(a, r){ return a + r.stars; }, 0);
-  return Math.round((t / TUTOR_REVIEWS.length) * 10) / 10;
+var REVIEW_SEQ = 0;
+TUTOR_REVIEWS.forEach(function(r){
+  var n = parseInt(String(r.id).replace('RV-', ''), 10);
+  if (!isNaN(n) && n > REVIEW_SEQ) REVIEW_SEQ = n;   /* derived from the seed — a fixed start collided twice before */
+});
+
+/* ── what a review is about, whatever its type ── */
+function reviewSubject(r){
+  if (r.type === 'course'){
+    var c = (typeof courseById === 'function') ? courseById(r.courseId) : null;
+    return c ? c.title : (r.subject || 'Course');
+  }
+  return r.subject || reviewTypeLabel(r.type);
 }
-/* The stat card used to hardcode 4.9 while the reviews said something else.
-   Deriving it means they cannot drift apart. */
+function reviewDateIso(r){
+  var t = (typeof DR_TODAY !== 'undefined') ? DR_TODAY : new Date();
+  var d = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  d.setDate(d.getDate() - (r.daysAgo || 0));
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+function reviewDayLabel(r){
+  var p = reviewDateIso(r).split('-');
+  return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString('en-US',
+    { month:'long', day:'numeric', year:'numeric' });
+}
+function reviewById(id){
+  for (var i = 0; i < TUTOR_REVIEWS.length; i++){ if (TUTOR_REVIEWS[i].id === id) return TUTOR_REVIEWS[i]; }
+  return null;
+}
+function reviewsOfType(t){
+  return t === 'all' ? TUTOR_REVIEWS.slice()
+                     : TUTOR_REVIEWS.filter(function(r){ return r.type === t; });
+}
+function reviewAverageFor(t){
+  var rs = reviewsOfType(t);
+  if (!rs.length) return null;
+  return Math.round((rs.reduce(function(a, r){ return a + r.stars; }, 0) / rs.length) * 10) / 10;
+}
+/* The headline average spans every type — it is the tutor's rating. */
+function reviewAverage(){
+  var a = reviewAverageFor('all');
+  return a == null ? 0 : a;
+}
 function tutorSyncRating(){
   if (typeof TUTOR_STATS !== 'undefined') TUTOR_STATS.rating = reviewAverage();
+}
+function starDistribution(){
+  var out = [0, 0, 0, 0, 0];                     /* index 0 = 1 star */
+  TUTOR_REVIEWS.forEach(function(r){
+    var i = Math.min(5, Math.max(1, r.stars)) - 1;
+    out[i] += 1;
+  });
+  return out;
+}
+function reviewsAwaitingReply(){
+  return TUTOR_REVIEWS.filter(function(r){ return !r.reply; }).length;
+}
+
+/* ── mutation: everything recomputes from the one array ── */
+function reviewsChanged(){
+  tutorSyncRating();
+  if (typeof tpcRender === 'function' && document.getElementById('tpcRows')) tpcRender();
+  if (typeof tdMountShell === 'function'){
+    /* the topbar and the sidebar badge both count reviews */
+    ['screen-tutor-home', 'screen-tutor-reviews'].forEach(function(id){
+      if (document.getElementById(id) && document.getElementById(id).classList.contains('active')){
+        tdMountShell(id, id === 'screen-tutor-reviews' ? 'reviews' : 'home');
+      }
+    });
+  }
+}
+function addReview(o){
+  REVIEW_SEQ += 1;
+  var r = { id:'RV-' + REVIEW_SEQ, type:o.type, courseId:o.courseId != null ? o.courseId : null,
+            refId:o.refId != null ? o.refId : null, subject:o.subject || null,
+            student:o.student, initials:(typeof stInitials === 'function' ? stInitials(o.student) : 'ST'),
+            stars:o.stars, daysAgo:0, reply:null, text:o.text };
+  TUTOR_REVIEWS.unshift(r);
+  reviewsChanged();
+  return r;
+}
+function updateReview(id, stars, text){
+  var r = reviewById(id);
+  if (!r) return null;
+  r.stars = stars;
+  r.text = text;
+  r.edited = true;
+  reviewsChanged();
+  return r;
+}
+function deleteReview(id){
+  for (var i = 0; i < TUTOR_REVIEWS.length; i++){
+    if (TUTOR_REVIEWS[i].id === id){ TUTOR_REVIEWS.splice(i, 1); break; }
+  }
+  reviewsChanged();
+}
+function setReviewReply(id, text){
+  var r = reviewById(id);
+  if (!r) return;
+  r.reply = { text:text, daysAgo:0 };
+}
+function clearReviewReply(id){
+  var r = reviewById(id);
+  if (r) r.reply = null;
+}
+
+/* ── what THIS student is entitled to review ────────────────────
+   Derived from what the prototype already knows they did, not from
+   a list of reviewable things maintained by hand:
+     · courses  — their enrolments in ST_ROSTER
+     · lessons  — 1-on-1 sessions taught to them, from HELD_FUNDS
+     · classes  — cohort membership, below
+   Anything already reviewed by that student drops out.
+
+   CLASS_ATTENDANCE is the one piece that had to be written down:
+   HELD_FUNDS records the Spanish cohort as "4 students" with no
+   names, so there was nothing to derive from. The four named here
+   match that count. Student1 is deliberately NOT among them — see
+   the note on the Reviews screen for why. ── */
+var CLASS_ATTENDANCE = {
+  1: ['Priya Sharma', 'Alex Morgan', 'Daniel Okafor', 'Student2 TrioEdX']
+};
+function studentHasReviewed(name, type, key){
+  return TUTOR_REVIEWS.some(function(r){
+    if (r.student !== name || r.type !== type) return false;
+    if (type === 'course') return String(r.courseId) === String(key);
+    return String(r.refId) === String(key);
+  });
+}
+function reviewableFor(name){
+  var out = [];
+  /* courses they are enrolled in */
+  var me = (typeof ST_ROSTER === 'undefined' ? [] : ST_ROSTER).filter(function(s){
+    return s.name === name;
+  })[0];
+  if (me){
+    me.courses.forEach(function(e){
+      if (studentHasReviewed(name, 'course', e.id)) return;
+      var c = (typeof courseById === 'function') ? courseById(e.id) : null;
+      if (!c) return;
+      out.push({ type:'course', key:e.id, courseId:e.id, subject:c.title, since:e.at });
+    });
+  }
+  /* 1-on-1 lessons already taught to them */
+  (typeof HELD_FUNDS === 'undefined' ? [] : HELD_FUNDS).forEach(function(h, i){
+    if (h.student !== name) return;
+    if (String(h.title).indexOf('1-on-1') !== 0) return;
+    var key = 'HF-' + (i + 1);
+    if (studentHasReviewed(name, 'lesson', key)) return;
+    out.push({ type:'lesson', key:key, courseId:null, subject:h.title, since:h.taughtOn });
+  });
+  /* group classes they attended */
+  Object.keys(CLASS_ATTENDANCE).forEach(function(cid){
+    if (CLASS_ATTENDANCE[cid].indexOf(name) === -1) return;
+    if (studentHasReviewed(name, 'class', cid)) return;
+    var g = (typeof GROUP_COURSES === 'undefined' ? [] : GROUP_COURSES).filter(function(x){
+      return String(x.id) === String(cid);
+    })[0];
+    out.push({ type:'class', key:cid, courseId:null,
+               subject:g ? g.title : 'Group class', since:null });
+  });
+  return out;
+}
+function reviewsBy(name){
+  return TUTOR_REVIEWS.filter(function(r){ return r.student === name; });
 }
 function courseById(id){
   /* Ids arrive as numbers from the data and as strings from onclick
@@ -8201,7 +8871,13 @@ function courseRevenue(c){
   return { gross:gross, mine:split.payeeEarn };
 }
 function courseRating(c){
-  var rs = TUTOR_REVIEWS.filter(function(r){ return r.courseId === c.id; });
+  /* v52 — reviews now cover lessons and classes too. A course is rated by its
+     own reviews only, so it is never marked down for a 1-on-1 lesson. The
+     tutor's headline rating does span all three; that is the difference
+     between rating a course and rating a teacher. */
+  var rs = TUTOR_REVIEWS.filter(function(r){
+    return r.type === 'course' && String(r.courseId) === String(c.id);
+  });
   if (!rs.length) return null;
   return Math.round((rs.reduce(function(a, r){ return a + r.stars; }, 0) / rs.length) * 10) / 10;
 }
@@ -8242,19 +8918,35 @@ function tpcRender(){
 
   var rw = document.getElementById('tpcReviews');
   if (rw){
-    rw.innerHTML = TUTOR_REVIEWS.map(function(r){
-      var c = courseById(r.courseId);
+    /* v51 — reviews are dated, so the Home date range filters them for real. */
+    var shown = (typeof tdReviewsInRange === 'function') ? tdReviewsInRange() : TUTOR_REVIEWS;
+    if (!shown.length){
+      rw.innerHTML = '<div class="qz-empty">No review was written in this date range. ' +
+        'The four on file span ' + agoLabel(Math.max.apply(null, TUTOR_REVIEWS.map(function(x){ return x.daysAgo; }))) +
+        ' to ' + agoLabel(Math.min.apply(null, TUTOR_REVIEWS.map(function(x){ return x.daysAgo; }))) + '.</div>';
+    } else
+    rw.innerHTML = shown.map(function(r){
+      /* v52 — courseById(r.courseId) returned null for a lesson or class review
+         and the label fell back to the word "Course", which was wrong on both.
+         reviewSubject() names whatever the review is actually about. */
       return '<div class="rv-row"><div class="rv-head">' +
         '<div class="rv-av">' + r.initials + '</div>' +
         '<div class="rv-id"><p class="rv-name">' + r.student + '</p>' +
-          '<span class="rv-course">' + (c ? c.title : 'Course') + '</span>' +
+          (typeof rvTypeChip === 'function' ? rvTypeChip(r.type) + ' ' : '') +
+          '<span class="rv-course">' + reviewSubject(r) + '</span>' +
           '<span class="rv-when">' + agoLabel(r.daysAgo) + '</span></div>' +
         '<div class="rv-stars">' + starsHtml(r.stars) + '</div>' +
-      '</div><p class="rv-text">' + r.text + '</p></div>';
+      '</div><p class="rv-text">' + r.text + '</p>' +
+      (r.reply ? '<div class="rv-reply"><p class="rv-reply-head">Your reply</p>' +
+        '<p class="rv-reply-text">' + r.reply.text + '</p></div>' : '') + '</div>';
     }).join('');
   }
   var avg = document.getElementById('tpcAvg');
-  if (avg) avg.innerHTML = '&#9733; ' + reviewAverage().toFixed(1) + ' from ' + TUTOR_REVIEWS.length + ' reviews';
+  if (avg){
+    var inR = (typeof tdReviewsInRange === 'function') ? tdReviewsInRange().length : TUTOR_REVIEWS.length;
+    avg.innerHTML = '&#9733; ' + reviewAverage().toFixed(1) + ' from ' + TUTOR_REVIEWS.length + ' reviews' +
+      (inR === TUTOR_REVIEWS.length ? '' : ' &middot; ' + inR + ' in range');
+  }
 }
 
 /* ── Quiz Attempts ──────────────────────────────────────────── */
@@ -8875,6 +9567,1673 @@ function renderTutorAnnounce(){
   anRender();
 }
 
+
+/* ════════════════════════════════════════════════════════════
+   v51 — THE SHARED DATA LAYER
+   ------------------------------------------------------------
+   Assignments and Analytics both need things this prototype had
+   never written down: who the tutor's students actually are, how
+   much content each course holds, and which enrolments were paid
+   for. All three are built ONCE here and derived everywhere else,
+   the same discipline v48 applied to the course count and v49 to
+   the rating.
+
+   Building the roster surfaced two contradictions that were
+   already in the file. Both are reported rather than papered
+   over — see ST_AUDIT at the bottom.
+════════════════════════════════════════════════════════════ */
+
+/* ── 1. The student roster ──────────────────────────────────────
+   Every enrolment here is a real (student, course) pair, and the
+   per-course totals reconcile exactly with COURSES[].students —
+   stAuditRoster() below proves it rather than asserting it.
+
+   The five named students are not invented for this screen: they
+   are the students who already sit quizzes in QZ_ATTEMPTS and
+   write the reviews in TUTOR_REVIEWS, so their enrolments are
+   forced by data that was already here. Every enrolment date
+   precedes that student's first quiz attempt in the same course.
+
+   The other 18 are new, with deliberately non-real example.com
+   addresses. dev's Students tab shows real people's real email
+   addresses; those are not reproduced here. ── */
+var ST_ROSTER = [
+  { name:'Nusrat Jahan',      email:'nusrat.jahan@example.com',   reg:'2026-09-14T11:20',
+    courses:[{ id:12, at:'2026-09-14T11:35' }] },
+  { name:'Rahim Chowdhury',   email:'rahim.chowdhury@example.com', reg:'2026-09-10T20:05',
+    courses:[{ id:12, at:'2026-09-10T20:18' }] },
+  { name:'Grace Mwangi',      email:'grace.mwangi@example.com',   reg:'2026-09-06T08:44',
+    courses:[{ id:5, at:'2026-09-06T09:02' }] },
+  { name:'Tomas Silva',       email:'tomas.silva@example.com',    reg:'2026-09-02T17:31',
+    courses:[{ id:5, at:'2026-09-02T17:48' }] },
+  { name:'Julia Schmidt',     email:'julia.schmidt@example.com',  reg:'2026-08-29T13:12',
+    courses:[{ id:11, at:'2026-08-29T13:26' }] },
+  { name:'Omar Farouk',       email:'omar.farouk@example.com',    reg:'2026-08-26T22:40',
+    courses:[{ id:10, at:'2026-08-26T22:55' }] },
+  { name:'Sara Lindqvist',    email:'sara.lindqvist@example.com', reg:'2026-08-24T10:03',
+    courses:[{ id:8, at:'2026-08-24T10:19' }] },
+  { name:'Kofi Asante',       email:'kofi.asante@example.com',    reg:'2026-08-21T19:26',
+    courses:[{ id:8, at:'2026-08-21T19:41' }] },
+  /* ── the five students the rest of the prototype already knows ── */
+  { name:'Priya Sharma',      email:'priya.sharma@example.com',   reg:'2026-08-05T12:58',
+    courses:[{ id:8, at:'2026-08-05T13:12' }, { id:5, at:'2026-08-06T08:50' }, { id:1, at:'2026-08-12T19:30' }] },
+  { name:'Alex Morgan',       email:'alex.morgan@example.com',    reg:'2026-07-29T10:06',
+    courses:[{ id:5, at:'2026-07-29T10:20' }, { id:8, at:'2026-08-14T09:05' }, { id:7, at:'2026-08-16T20:40' }] },
+  { name:'Daniel Okafor',     email:'daniel.okafor@example.com',  reg:'2026-07-26T20:48',
+    courses:[{ id:5, at:'2026-07-26T21:05' }, { id:7, at:'2026-08-11T11:45' }] },
+  { name:'Student2 TrioEdX',  email:'student2@trioedx.com',       reg:'2026-07-22T18:14',
+    courses:[{ id:5, at:'2026-07-22T18:30' }, { id:8, at:'2026-08-02T14:22' }, { id:6, at:'2026-08-04T09:15' }] },
+  { name:'Student1 TrioEdX',  email:'student1@trioedx.com',       reg:'2026-07-18T11:42',
+    courses:[{ id:5, at:'2026-07-18T12:00' }, { id:3, at:'2026-07-20T16:40' }] },
+  /* ── and the rest ── */
+  { name:'Elena Petrova',     email:'elena.petrova@example.com',  reg:'2026-07-14T09:37',
+    courses:[{ id:8, at:'2026-07-14T09:52' }] },
+  { name:'Ravi Menon',        email:'ravi.menon@example.com',     reg:'2026-07-09T15:04',
+    courses:[{ id:8, at:'2026-07-09T15:22' }] },
+  { name:'Nadia Haddad',      email:'nadia.haddad@example.com',   reg:'2026-07-06T07:55',
+    courses:[{ id:5, at:'2026-07-06T08:11' }] },
+  { name:"Liam O'Connor",     email:'liam.oconnor@example.com',   reg:'2026-07-01T21:18',
+    courses:[{ id:5, at:'2026-07-01T21:33' }] },
+  { name:'Marta Kowalski',    email:'marta.kowalski@example.com', reg:'2026-06-27T14:29',
+    courses:[{ id:5, at:'2026-06-27T14:46' }] },
+  { name:'Chen Wei',          email:'chen.wei@example.com',       reg:'2026-06-23T06:41',
+    courses:[{ id:5, at:'2026-06-23T06:58' }] },
+  { name:'Fatima Noor',       email:'fatima.noor@example.com',    reg:'2026-06-19T18:02',
+    courses:[{ id:3, at:'2026-06-19T18:15' }] },
+  { name:'Hassan Bello',      email:'hassan.bello@example.com',   reg:'2026-06-15T12:37',
+    courses:[{ id:3, at:'2026-06-15T12:51' }] },
+  { name:'Amina Sowe',        email:'amina.sowe@example.com',     reg:'2026-06-11T09:24',
+    courses:[{ id:3, at:'2026-06-11T09:40' }] },
+  { name:'Yusuf Karim',       email:'yusuf.karim@example.com',    reg:'2026-06-06T16:50',
+    courses:[{ id:3, at:'2026-06-06T17:04' }] }
+];
+function stInitials(name){
+  return String(name).split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0, 2).toUpperCase();
+}
+function stEnrolmentCount(){
+  return ST_ROSTER.reduce(function(t, s){ return t + s.courses.length; }, 0);
+}
+function stStudentsInCourse(id){
+  return ST_ROSTER.filter(function(s){
+    return s.courses.some(function(e){ return String(e.id) === String(id); });
+  });
+}
+function stEnrolment(student, courseId){
+  for (var i = 0; i < student.courses.length; i++){
+    if (String(student.courses[i].id) === String(courseId)) return student.courses[i];
+  }
+  return null;
+}
+/* The headline student figure stops being a typed-in number. v48 did this
+   for the course count, v49 for the rating; 26 was the last one left. */
+function tutorRecountStudents(){
+  if (typeof TUTOR_STATS !== 'undefined') TUTOR_STATS.students = ST_ROSTER.length;
+}
+
+/* ── 2. How much content each course holds ──────────────────────
+   COURSES carried a price and an enrolment count but never a
+   lesson or quiz count, which dev's Courses tab shows on every
+   row. Assignment counts are NOT stored here — they are counted
+   from ASSIGNMENTS, so the two can never disagree. ── */
+var COURSE_CONTENT = {
+  1:  { lessons:6,  quizzes:2 },
+  2:  { lessons:4,  quizzes:0 },
+  3:  { lessons:9,  quizzes:2 },
+  4:  { lessons:5,  quizzes:0 },
+  5:  { lessons:35, quizzes:11 },
+  6:  { lessons:12, quizzes:3 },
+  7:  { lessons:8,  quizzes:3 },
+  8:  { lessons:21, quizzes:4 },
+  9:  { lessons:7,  quizzes:0 },
+  10: { lessons:4,  quizzes:0 },
+  11: { lessons:5,  quizzes:1 },
+  12: { lessons:6,  quizzes:1 }
+};
+function courseContent(id){ return COURSE_CONTENT[id] || { lessons:0, quizzes:0 }; }
+function courseAssignmentCount(id){
+  return (typeof ASSIGNMENTS === 'undefined' ? [] : ASSIGNMENTS).filter(function(a){
+    return String(a.courseId) === String(id);
+  }).length;
+}
+/* A course cannot hold fewer quizzes than students have already sat in it. */
+function courseQuizzesAttempted(id){
+  var seen = {};
+  (typeof QZ_ATTEMPTS === 'undefined' ? [] : QZ_ATTEMPTS).forEach(function(a){
+    if (String(a.courseId) === String(id)) seen[a.quiz] = 1;
+  });
+  return Object.keys(seen).length;
+}
+
+/* ── 3. Assignments ─────────────────────────────────────────────
+   dev's Assignments page is genuinely empty — "All Courses (0)",
+   "All (0)", "No Assignments Found!". Matching that exactly would
+   have given you dropdowns, a search box and a date picker with
+   nothing to act on, so these six are seeded across the published
+   courses. Every one names a student who is really enrolled in
+   that course, and no submission predates its enrolment.
+   The empty state is still reachable: filter to any course
+   without assignments. ── */
+var ASSIGNMENTS = [
+  { id:'AS-2106', title:'Write a five-prompt chain for a support triage bot',
+    courseId:5, student:'Alex Morgan',      due:'2026-09-14T23:59', submitted:'2026-09-12T21:34',
+    status:'pending',     mark:null, total:100 },
+  { id:'AS-2105', title:'Build a two-page hospital KPI dashboard',
+    courseId:8, student:'Priya Sharma',     due:'2026-09-11T23:59', submitted:'2026-09-09T17:12',
+    status:'graded',      mark:88,   total:100 },
+  { id:'AS-2104', title:'Resolve a merge conflict and document each step',
+    courseId:7, student:'Daniel Okafor',    due:'2026-09-07T23:59', submitted:'2026-09-05T13:48',
+    status:'graded',      mark:74,   total:100 },
+  { id:'AS-2103', title:'Annotate one rak&rsquo;ah line by line',
+    courseId:3, student:'Student1 TrioEdX', due:'2026-09-20T23:59', submitted:null,
+    status:'unsubmitted', mark:null, total:100 },
+  { id:'AS-2102', title:'Refactor the ward-admission script into functions',
+    courseId:6, student:'Student2 TrioEdX', due:'2026-09-06T23:59', submitted:'2026-09-02T10:07',
+    status:'pending',     mark:null, total:100 },
+  { id:'AS-2101', title:'Rewrite one weak prompt three ways and compare',
+    courseId:5, student:'Chen Wei',         due:'2026-08-31T23:59', submitted:'2026-08-29T19:55',
+    status:'graded',      mark:91,   total:100 }
+];
+var AS_SEQ = 0;
+ASSIGNMENTS.forEach(function(a){
+  var n = parseInt(String(a.id).replace('AS-', ''), 10);
+  if (!isNaN(n) && n > AS_SEQ) AS_SEQ = n;     /* derived from the seed — a fixed start collided twice before */
+});
+var AS_STATUSES = ['all', 'pending', 'graded', 'unsubmitted'];
+var AS_LABELS = { all:'All', pending:'Needs review', graded:'Graded', unsubmitted:'Not submitted' };
+
+/* ── 4. The course order ledger ─────────────────────────────────
+   Every paid enrolment, run through the live revenue engine —
+   nothing typed in. Only two of the twelve courses cost anything
+   (Git & GitHub at $14.99, Power BI at $39.99), so this is nine
+   orders, not nine hundred.
+
+   Course 7 carries a listPrice of $23.00 in TC_META, so its
+   platform fee is computed on the PRE-DISCOUNT amount — the v5
+   rule that the tutor funds the coupon. That is why a $14.99 sale
+   returns the tutor $2.90 while a $39.99 sale returns $17.30.
+
+   This is deliberately NOT pushed into ORDERS. ORDERS is the live
+   session ledger the payout dashboard reads; filling it with
+   historical course sales would rewrite that screen's figures. ── */
+var COURSE_LEDGER = [];
+function buildCourseLedger(){
+  COURSE_LEDGER.length = 0;
+  if (typeof COURSES === 'undefined' || typeof computeCourseSplit !== 'function') return;
+  var rows = [];
+  COURSES.forEach(function(c){
+    if (!c.price || c.price <= 0) return;
+    var meta = (typeof tcMeta === 'function') ? tcMeta(c.id) : {};
+    var list = meta.listPrice != null ? meta.listPrice : c.price;
+    stStudentsInCourse(c.id).forEach(function(s){
+      var e = stEnrolment(s, c.id);
+      rows.push({ courseId:c.id, title:c.title, student:s.name, email:s.email,
+                  at:e ? e.at : s.reg, amount:c.price, listAmount:list });
+    });
+  });
+  rows.sort(function(a, b){ return a.at < b.at ? -1 : (a.at > b.at ? 1 : 0); });   /* oldest gets the lowest order id */
+  var seq = 4300;
+  rows.forEach(function(r){
+    var split = computeCourseSplit(r.amount, 'organic', r.listAmount);
+    seq += 1;
+    COURSE_LEDGER.push({
+      order:'#' + seq, courseId:r.courseId, title:r.title, student:r.student, email:r.email, at:r.at,
+      amount:r.amount, listAmount:r.listAmount,
+      discount:Math.round((r.listAmount - r.amount) * 100) / 100,
+      tax:split.tax, processing:split.processing, netRevenue:split.netRevenue,
+      platformTake:split.platformTake, payeeEarn:split.payeeEarn, rate:split.rate,
+      state:'completed'
+    });
+  });
+  COURSE_LEDGER.reverse();                                                          /* newest first for display */
+}
+function clSum(rows, key){
+  return Math.round(rows.reduce(function(t, r){ return t + (r[key] || 0); }, 0) * 100) / 100;
+}
+/* Funds release 31 days after the sale, the day after the refund window shuts.
+   "Now" is DR_TODAY, not the wall clock, so the held/released split cannot
+   drift as this file ages on someone's desktop. */
+function clHeld(r){
+  var p = String(r.at).split('T')[0].split('-');
+  var release = new Date(+p[0], +p[1] - 1, +p[2]);
+  release.setDate(release.getDate() + (typeof PAYOUT_HOLD_DAYS !== 'undefined' ? PAYOUT_HOLD_DAYS : 31));
+  var today = (typeof DR_TODAY !== 'undefined') ? DR_TODAY : new Date();
+  return { held:release > today, release:release };
+}
+function clCourseEarnings(){ return clSum(COURSE_LEDGER, 'payeeEarn'); }
+
+/* Home's Total Earnings card read a typed-in lifetime baseline and ignored
+   course sales entirely, so it would have contradicted the Analytics
+   Earnings tab on sight. It now adds the ledger. */
+function tutorCourseLedgerEarnings(){ return clCourseEarnings(); }
+
+/* ── 5. What the roster proved ──────────────────────────────────
+   Run on load. Returns the contradictions rather than hiding them;
+   the Analytics page prints whatever comes back. ── */
+var ST_AUDIT = { mismatches:[], quizShortfalls:[] };
+function stAuditRoster(){
+  ST_AUDIT.mismatches = [];
+  ST_AUDIT.quizShortfalls = [];
+  (typeof COURSES === 'undefined' ? [] : COURSES).forEach(function(c){
+    var mine = stStudentsInCourse(c.id).length;
+    if (mine !== (c.students || 0)){
+      ST_AUDIT.mismatches.push({ id:c.id, title:c.title, catalog:c.students || 0, roster:mine });
+    }
+    var q = courseContent(c.id).quizzes, sat = courseQuizzesAttempted(c.id);
+    if (sat > q) ST_AUDIT.quizShortfalls.push({ id:c.id, title:c.title, quizzes:q, attempted:sat });
+  });
+  return ST_AUDIT;
+}
+function v51Init(){
+  buildCourseLedger();
+  tutorRecountStudents();
+  stAuditRoster();
+}
+
+/* ════════════════════════════════════════════════════════════
+   v51 — TUTOR HOME: the All Time filter stops being an alert
+   ------------------------------------------------------------
+   v43 put an alert behind the "All Time" pill saying it "would
+   change the reporting period". Your screenshot shows it opening
+   the same two-month picker v50 built for Announcements and Quiz
+   Attempts, so it mounts that component rather than growing a
+   third implementation of one.
+
+   What a date range can and cannot honestly do on this page:
+
+   CAN — reviews carry a date, enrolments carry a date, and every
+   course sale carries a date, so the summary card and the reviews
+   list below both filter for real.
+
+   CANNOT — "Earnings Over Time" and "Course Completion Rate" are
+   labelled illustrative shapes, not computed from order data. A
+   range cannot filter a drawing. Rather than pretend, both charts
+   now say plainly that the range does not reach them.
+════════════════════════════════════════════════════════════ */
+
+/* Reviews store daysAgo, not a date, so give them one — anchored to the same
+   pinned "today" the picker uses so the two cannot drift apart. */
+function reviewIso(r){
+  var t = (typeof DR_TODAY !== 'undefined') ? DR_TODAY : new Date();
+  var d = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  d.setDate(d.getDate() - (r.daysAgo || 0));
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+function tdInRange(iso){
+  return (typeof drInRange !== 'function') || drInRange('tdHomeDate', iso);
+}
+function tdReviewsInRange(){
+  return (typeof TUTOR_REVIEWS === 'undefined' ? [] : TUTOR_REVIEWS).filter(function(r){
+    return tdInRange(reviewIso(r));
+  });
+}
+function tdEnrolmentsInRange(){
+  var n = 0;
+  (typeof ST_ROSTER === 'undefined' ? [] : ST_ROSTER).forEach(function(s){
+    s.courses.forEach(function(e){ if (tdInRange(e.at)) n += 1; });
+  });
+  return n;
+}
+function tdStudentsInRange(){
+  return (typeof ST_ROSTER === 'undefined' ? [] : ST_ROSTER).filter(function(s){
+    return tdInRange(s.reg);
+  }).length;
+}
+function tdOrdersInRange(){
+  return (typeof COURSE_LEDGER === 'undefined' ? [] : COURSE_LEDGER).filter(function(r){
+    return tdInRange(r.at);
+  });
+}
+function tdRenderRange(){
+  var wrap = document.getElementById('tdRangeCells');
+  if (!wrap) return;
+  var orders = tdOrdersInRange();
+  var label = (typeof drLabel === 'function') ? drLabel('tdHomeDate') : 'All Time';
+  var isAll = label === 'All Time';
+  var cells = [
+    ['Course sales', money(clSum(orders, 'payeeEarn')), orders.length + (orders.length === 1 ? ' order' : ' orders')],
+    ['New students', tdStudentsInRange(), 'registered'],
+    ['Enrolments',   tdEnrolmentsInRange(), 'across your courses'],
+    ['Reviews',      tdReviewsInRange().length, 'received']
+  ];
+  wrap.innerHTML = cells.map(function(c){
+    return '<div class="ana-cell"><p class="ana-cell-label">' + c[0] + '</p>' +
+      '<p class="ana-cell-val">' + c[1] + '</p><p class="ana-cell-sub">' + c[2] + '</p></div>';
+  }).join('');
+  var lab = document.getElementById('tdRangeLabel');
+  if (lab){
+    lab.innerHTML = isAll
+      ? 'Showing <b>all time</b>. Pick a range from the calendar above and these four recount.'
+      : 'Showing <b>' + label + '</b>. These four and the reviews at the bottom of the page are recounted; ' +
+        'the stat cards above stay all-time, and the two charts are unaffected.';
+  }
+}
+/* dev's trigger here is the pill itself, not the small calendar button the
+   other two pages use. Same picker, same state, different skin — a second
+   mount helper rather than a second picker. The [data-drlabel] hook already
+   existed in drApply for exactly this. */
+function drMountPillHtml(id){
+  return '<div class="dr-wrap" id="' + id + '">' +
+    '<button type="button" class="td-chip" data-drbtn="' + id + '" onclick="drToggle(\'' + id + '\')">' +
+      '&#128197; <span data-drlabel="' + id + '">All Time</span></button>' +
+    '<div class="dr-pop left"></div></div>';
+}
+function tdMountHomePicker(){
+  var mount = document.getElementById('tdHomeDateMount');
+  if (!mount) return;
+  if (document.getElementById('tdHomeDate')) return;     /* mount once; the state lives in DR_STATE */
+  mount.innerHTML = drMountPillHtml('tdHomeDate');
+  drInit('tdHomeDate').onApply = function(){
+    if (typeof renderTutorHome === 'function') renderTutorHome();
+  };
+}
+
+/* ════════════════════════════════════════════════════════════
+   v51 — TUTOR: ASSIGNMENTS
+   ------------------------------------------------------------
+   Reuses what already exists rather than restating it: the
+   searchable course dropdown from v50, the shared date picker,
+   the mark ring and timestamp helpers from v49's quiz page, and
+   the sheet (cfOpen) the announcements composer uses.
+
+   The one thing dev's empty page could not tell me is what a
+   populated row looks like, so the row follows this prototype's
+   own quiz-attempt table — the closest sibling screen — rather
+   than an invented layout.
+════════════════════════════════════════════════════════════ */
+
+var asCourse = 'all', asStatus = 'all', asNewestFirst = true;
+
+function asById(id){
+  for (var i = 0; i < ASSIGNMENTS.length; i++){ if (ASSIGNMENTS[i].id === id) return ASSIGNMENTS[i]; }
+  return null;
+}
+function asSortKey(a){ return a.submitted || a.due; }
+function asMatches(a, ignore){
+  if (ignore !== 'course' && asCourse !== 'all' && String(a.courseId) !== String(asCourse)) return false;
+  if (ignore !== 'status' && asStatus !== 'all' && a.status !== asStatus) return false;
+  if (typeof drInRange === 'function' && !drInRange('asDate', asSortKey(a))) return false;
+  var q = ((document.getElementById('asSearch') || {}).value || '').trim().toLowerCase();
+  if (q){
+    var c = courseById(a.courseId);
+    var hay = (a.title + ' ' + a.student + ' ' + (c ? c.title : '')).toLowerCase();
+    if (hay.indexOf(q) === -1) return false;
+  }
+  return true;
+}
+/* Every count on this page is counted, never stored. */
+function asCountForCourse(id){
+  return ASSIGNMENTS.filter(function(a){
+    return (id === 'all' || String(a.courseId) === String(id)) && asMatches(a, 'course');
+  }).length;
+}
+function asCountForStatus(st){
+  return ASSIGNMENTS.filter(function(a){
+    return (st === 'all' || a.status === st) && asMatches(a, 'status');
+  }).length;
+}
+function asSetCourse(id){
+  asCourse = id;
+  var d = document.getElementById('asCourseDrop');
+  if (d) d.classList.remove('open');
+  asRender();
+}
+function asSetStatus(st){
+  asStatus = st;
+  var d = document.getElementById('asStatusDrop');
+  if (d) d.classList.remove('open');
+  asRender();
+}
+function asToggleSort(){
+  asNewestFirst = !asNewestFirst;
+  var b = document.getElementById('asSortBtn');
+  if (b) b.title = asNewestFirst ? 'Newest first' : 'Oldest first';
+  asRender();
+}
+function asRenderDrops(){
+  /* course menu — only courses that actually carry an assignment are listed */
+  var menu = document.getElementById('asCourseMenu');
+  if (menu){
+    var q = menuFilterText('asCourseSearch');
+    var ids = [];
+    ASSIGNMENTS.forEach(function(a){ if (ids.indexOf(a.courseId) === -1) ids.push(a.courseId); });
+    var items = [];
+    if (!q || 'all courses'.indexOf(q) !== -1){
+      items.push('<a class="' + (asCourse === 'all' ? 'on' : '') + '" onclick="asSetCourse(\'all\')">All Courses (' +
+        asCountForCourse('all') + ')</a>');
+    }
+    ids.forEach(function(id){
+      var c = courseById(id);
+      var t = c ? c.title : 'Course ' + id;
+      if (q && t.toLowerCase().indexOf(q) === -1) return;
+      items.push('<a class="' + (String(asCourse) === String(id) ? 'on' : '') + '" onclick="asSetCourse(\'' + id +
+        '\')" title="' + t.replace(/"/g, '&quot;') + '">' + t + ' (' + asCountForCourse(id) + ')</a>');
+    });
+    menu.innerHTML = menuSearchHtml('asCourseSearch', 'Search Course', 'asRenderDrops()') +
+      '<div class="qz-menu-list">' +
+      (items.length ? items.join('') : '<p class="qz-menu-none">No course matches that.</p>') + '</div>';
+    var el = document.getElementById('asCourseSearch');
+    if (el && q){ el.value = q; el.focus(); }
+  }
+  var lab = document.getElementById('asCourseLabel');
+  if (lab){
+    var cc = asCourse === 'all' ? null : courseById(asCourse);
+    lab.textContent = (cc ? cc.title.slice(0, 34) + (cc.title.length > 34 ? '…' : '') : 'All Courses') +
+      ' (' + asCountForCourse(asCourse) + ')';
+  }
+
+  var sm = document.getElementById('asStatusMenu');
+  if (sm){
+    sm.innerHTML = AS_STATUSES.map(function(st){
+      return '<a class="' + (asStatus === st ? 'on' : '') + '" onclick="asSetStatus(\'' + st + '\')">' +
+        AS_LABELS[st] + ' (' + asCountForStatus(st) + ')</a>';
+    }).join('');
+  }
+  var sl = document.getElementById('asStatusLabel');
+  if (sl) sl.textContent = AS_LABELS[asStatus] + ' (' + asCountForStatus(asStatus) + ')';
+}
+function asStatusPill(a){
+  if (a.status === 'graded')   return '<span class="as-pill graded">Graded</span>';
+  if (a.status === 'pending')  return '<span class="as-pill pending">Needs review</span>';
+  return '<span class="as-pill missing">Not submitted</span>';
+}
+function asLate(a){
+  if (!a.submitted) return false;
+  return String(a.submitted) > String(a.due);
+}
+function asRowHtml(a){
+  var c = courseById(a.courseId);
+  var title = c ? c.title : 'Course ' + a.courseId;
+  var markCell = a.status === 'graded'
+    ? qzRingHtml(Math.round((a.mark / a.total) * 100))
+    : '<div class="qz-ring empty"><span>&mdash;</span></div>';
+  var when = a.submitted
+    ? qzWhen(a.submitted) + (asLate(a) ? ' <span class="as-late">late</span>' : '')
+    : '<span class="as-dim">Nothing submitted yet</span>';
+  var act = a.status === 'unsubmitted'
+    ? '<button type="button" class="as-linkbtn" onclick="asRemind(\'' + a.id + '\')">Send a reminder</button>'
+    : '<button type="button" class="as-linkbtn" onclick="asGrade(\'' + a.id + '\')">' +
+      (a.status === 'graded' ? 'Change mark' : 'Grade it') + '</button>';
+  return '<tr>' +
+    '<td><p class="as-title">' + a.title + '</p>' +
+      '<p class="as-meta"><b>' + a.student + '</b> &nbsp;&bull;&nbsp; ' + title + '</p>' +
+      '<p class="as-meta dim">' + a.id + ' &nbsp;&bull;&nbsp; due ' + qzWhen(a.due) + '</p></td>' +
+    '<td>' + markCell + '</td>' +
+    '<td><p class="as-when">' + when + '</p>' + act + '</td>' +
+    '<td>' + asStatusPill(a) + '</td>' +
+    '</tr>';
+}
+function asRender(){
+  var body = document.getElementById('asBody');
+  var empty = document.getElementById('asEmpty');
+  if (!body) return;
+  /* mount the shared date picker once — third and fourth mounts of one component */
+  var mount = document.getElementById('asDateMount');
+  if (mount && !document.getElementById('asDate')){
+    mount.innerHTML = drMountHtml('asDate');
+    drInit('asDate').onApply = function(){ asRender(); };
+  }
+  asRenderDrops();
+  var rows = ASSIGNMENTS.filter(function(a){ return asMatches(a); });
+  rows.sort(function(x, y){
+    var a = asSortKey(x), b = asSortKey(y);
+    return asNewestFirst ? (a < b ? 1 : a > b ? -1 : 0) : (a > b ? 1 : a < b ? -1 : 0);
+  });
+  body.innerHTML = rows.map(asRowHtml).join('');
+  var table = body.closest('.td-card');
+  if (empty){
+    if (rows.length){
+      empty.style.display = 'none';
+      if (table) table.style.display = '';
+    } else {
+      /* dev's own empty state, which is the only state dev has */
+      empty.innerHTML =
+        '<svg width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" ' +
+          'style="color:#d1d5db;margin:0 auto 12px;display:block;">' +
+          '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>' +
+          '<path d="M9 13h6M9 17h4"/></svg>' +
+        '<p style="font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tnb-dark);margin:0 0 6px;">' +
+          'No Assignments Found!</p>' +
+        '<p style="margin:0;">Nothing matches these filters. This is the state dev.trioedx.com is in for every ' +
+          'course &mdash; clear the filters to see the six seeded here.</p>';
+      empty.style.display = '';
+      if (table) table.style.display = 'none';
+    }
+  }
+  var n = document.getElementById('asShowing');
+  if (n) n.textContent = rows.length + ' of ' + ASSIGNMENTS.length;
+}
+/* ── grading actually works ── */
+function asGrade(id){
+  var a = asById(id);
+  if (!a) return;
+  cfOpen(
+    '<h3>Grade this submission</h3>' +
+    '<p class="an-form-err" id="asErr"></p>' +
+    '<p class="pc-card-sub" style="margin:0 0 14px;"><b>' + a.title + '</b><br>' + a.student + ' &mdash; submitted ' +
+      (a.submitted ? qzWhen(a.submitted) : 'not yet') + '</p>' +
+    '<div class="an-form-row"><label>Mark out of ' + a.total + '</label>' +
+      '<input type="number" id="asFMark" min="0" max="' + a.total + '" value="' +
+      (a.mark != null ? a.mark : '') + '" placeholder="0&ndash;' + a.total + '"></div>' +
+    '<div class="an-form-row"><label>Feedback to the student <span class="as-dim">(optional)</span></label>' +
+      '<textarea id="asFNote" placeholder="What did they get right, and what would you change?">' +
+      (a.note || '') + '</textarea></div>' +
+    '<div class="cf-acts">' +
+      '<button type="button" class="pc-btn" onclick="cfClose()">Cancel</button>' +
+      '<button type="button" class="pc-btn primary" onclick="asSaveGrade(\'' + a.id + '\')">Save mark</button></div>');
+}
+function asSaveGrade(id){
+  var a = asById(id);
+  if (!a) return;
+  var raw = ((document.getElementById('asFMark') || {}).value || '').trim();
+  var err = document.getElementById('asErr');
+  var mark = parseFloat(raw);
+  if (raw === '' || isNaN(mark) || mark < 0 || mark > a.total){
+    if (err){ err.textContent = 'Enter a mark between 0 and ' + a.total + '.'; err.style.display = 'block'; }
+    return;
+  }
+  a.mark = Math.round(mark * 10) / 10;
+  a.note = ((document.getElementById('asFNote') || {}).value || '').trim();
+  a.status = 'graded';
+  cfClose();
+  asRender();
+}
+function asRemind(id){
+  var a = asById(id);
+  if (!a) return;
+  alert('Prototype only — this would email ' + a.student + ' that "' +
+        String(a.title).replace(/&rsquo;/g, '’') + '" is still outstanding.\n\n' +
+        'Nothing is sent from this file; there is no mail service behind it.');
+}
+function renderTutorAssign(){
+  tdMountShell('screen-tutor-assign', 'assignments');
+  asRender();
+}
+
+/* ════════════════════════════════════════════════════════════
+   v51 — TUTOR: ANALYTICS  (all six tabs)
+   ------------------------------------------------------------
+   Overview · Courses · Earnings · Statements · Students · Export.
+
+   Every figure on every tab is computed from the prototype's own
+   data by the live revenue engine. Nothing is typed in, which is
+   why the numbers do not match dev's: dev has 18 courses, 26
+   students and 2 reviews behind it; this file has 12, 23 and 4,
+   and says so on screen rather than borrowing dev's totals.
+
+   The chart is hand-drawn inline SVG. This file loads no scripts
+   and no images, so a charting library was never an option.
+════════════════════════════════════════════════════════════ */
+
+var ANA_TABS = [
+  { key:'overview',   label:'Overview' },
+  { key:'courses',    label:'Courses' },
+  { key:'earnings',   label:'Earnings' },
+  { key:'statements', label:'Statements' },
+  { key:'students',   label:'Students' },
+  { key:'export',     label:'Export' }
+];
+var anaTab = 'overview';
+/* One period per graph, so Overview's switch and Earnings' switch don't fight. */
+var ANA_PERIOD = { ov:'year', earn:'year' };
+var anaStmtCourse = 'all', anaStuCourse = 'all';
+var anaStmtNewest = true, anaStuNewest = true, anaCoursesSort = 'earnings';
+
+function money(n){ return '$' + (Math.round((n || 0) * 100) / 100).toFixed(2); }
+function anaDay(iso){
+  var p = String(iso).split('T')[0].split('-');
+  return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString('en-US',
+    { month:'long', day:'numeric', year:'numeric' });
+}
+function anaSetTab(k){ anaTab = k; anaRender(); }
+
+/* Thumbnails are the catalog's own gradients. Course 6 has thumbGrad:null
+   because it used a photograph on the live site, so it needs a fallback —
+   v48 learned that one the hard way. */
+function anaThumb(c){
+  var grad = c.thumbGrad || 'linear-gradient(145deg,#2b2b33,#5b5b66)';
+  var label = c.thumbLabel || String(c.title).split(/[:—]/)[0].slice(0, 16);
+  return '<span class="ana-thumb" style="background:' + grad + '">' + label + '</span>';
+}
+function anaCourseEarnings(id){
+  return clSum(COURSE_LEDGER.filter(function(r){ return String(r.courseId) === String(id); }), 'payeeEarn');
+}
+function anaSortIcon(){
+  return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+    '<path d="M8 4v16M8 20l-3-3M16 20V4M16 4l3 3"/></svg>';
+}
+function anaSearchIcon(){
+  return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+    '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>';
+}
+
+/* ════════════ the shared Earnings Graph ════════════
+   dev shows both a Today/Monthly/Yearly switch and a calendar icon on the
+   same card. They do different jobs here: the switch picks the buckets the
+   bars are grouped into, the picker narrows which orders are counted. */
+function anaPeriodWindow(period){
+  var t = (typeof DR_TODAY !== 'undefined') ? DR_TODAY : new Date();
+  if (period === 'today') return [new Date(t.getFullYear(), t.getMonth(), t.getDate()),
+                                  new Date(t.getFullYear(), t.getMonth(), t.getDate())];
+  if (period === 'month') return [new Date(t.getFullYear(), t.getMonth(), 1),
+                                  new Date(t.getFullYear(), t.getMonth() + 1, 0)];
+  return [new Date(t.getFullYear(), 0, 1), new Date(t.getFullYear(), 11, 31)];
+}
+function anaRowsFor(scope, period){
+  var pickerId = scope === 'ov' ? 'anaOvDate' : 'anaEarnDate';
+  var w = anaPeriodWindow(period);
+  return COURSE_LEDGER.filter(function(r){
+    var p = String(r.at).split('T')[0].split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (d < w[0] || d > w[1]) return false;
+    if (typeof drInRange === 'function' && !drInRange(pickerId, r.at)) return false;
+    return true;
+  });
+}
+function anaSetPeriod(scope, p){ ANA_PERIOD[scope] = p; anaRender(); }
+/* One bar per three hours today, per day this month, per month this year. */
+function anaBuckets(period, rows){
+  var t = (typeof DR_TODAY !== 'undefined') ? DR_TODAY : new Date();
+  var out = [], i;
+  if (period === 'today'){
+    for (i = 0; i < 24; i += 3) out.push({ label:(i < 10 ? '0' : '') + i + ':00', total:0 });
+    rows.forEach(function(r){
+      var h = parseInt(String(r.at).split('T')[1] || '0', 10) || 0;
+      var slot = Math.min(out.length - 1, Math.floor(h / 3));
+      out[slot].total += r.payeeEarn;
+    });
+  } else if (period === 'month'){
+    var days = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
+    for (i = 1; i <= days; i++) out.push({ label:String(i), total:0 });
+    rows.forEach(function(r){
+      var d = parseInt(String(r.at).split('T')[0].split('-')[2], 10);
+      if (out[d - 1]) out[d - 1].total += r.payeeEarn;
+    });
+  } else {
+    var ms = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    for (i = 0; i < 12; i++) out.push({ label:ms[i], total:0 });
+    rows.forEach(function(r){
+      var m = parseInt(String(r.at).split('T')[0].split('-')[1], 10) - 1;
+      if (out[m]) out[m].total += r.payeeEarn;
+    });
+  }
+  out.forEach(function(b){ b.total = Math.round(b.total * 100) / 100; });
+  return out;
+}
+function anaChartHtml(period, rows){
+  var buckets = anaBuckets(period, rows);
+  var max = buckets.reduce(function(m, b){ return Math.max(m, b.total); }, 0);
+  if (max <= 0){
+    return '<div class="ana-chart-empty">' +
+      '<svg width="100%" height="104" viewBox="0 0 800 104" preserveAspectRatio="none">' +
+      '<line x1="8" y1="96" x2="792" y2="96" stroke="#111827" stroke-width="1.5"/></svg>' +
+      '<p>No sales in this window, so there is nothing to plot. That is a real zero rather than a placeholder ' +
+      '&mdash; switch to <b>Yearly</b> for the nine orders the ledger does hold.</p></div>';
+  }
+  var W = 800, H = 176, pad = 26, n = buckets.length;
+  var bw = (W - pad * 2) / n;
+  var bars = '', labels = '';
+  var every = n > 16 ? 5 : 1;
+  buckets.forEach(function(b, i){
+    var h = b.total > 0 ? Math.max(3, ((H - 58) * b.total) / max) : 0;
+    var x = pad + i * bw + bw * 0.18, w = bw * 0.64;
+    if (h > 0){
+      bars += '<rect x="' + x.toFixed(1) + '" y="' + (H - 26 - h).toFixed(1) + '" width="' + w.toFixed(1) +
+        '" height="' + h.toFixed(1) + '" rx="3" fill="#630320"><title>' + b.label + ' — ' +
+        money(b.total) + '</title></rect>' +
+        '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H - 32 - h).toFixed(1) +
+        '" text-anchor="middle" font-size="10.5" font-weight="700" fill="#630320" ' +
+        'font-family="DM Sans, sans-serif">' + money(b.total) + '</text>';
+    }
+    if (i % every === 0 || h > 0){
+      labels += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H - 9) +
+        '" text-anchor="middle" font-size="10" fill="#9ca3af" font-family="DM Sans, sans-serif">' +
+        b.label + '</text>';
+    }
+  });
+  return '<svg class="ana-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Earnings by period">' +
+    '<line x1="' + pad + '" y1="' + (H - 26) + '" x2="' + (W - pad) + '" y2="' + (H - 26) +
+    '" stroke="#e5e7eb" stroke-width="1"/>' + bars + labels + '</svg>';
+}
+function anaCell(label, value, hot){
+  return '<div class="ana-cell' + (hot ? ' hot' : '') + '"><p class="ana-cell-label">' + label +
+    '</p><p class="ana-cell-val">' + value + '</p></div>';
+}
+function anaGraphCard(scope, cellsFn){
+  var period = ANA_PERIOD[scope];
+  var rows = anaRowsFor(scope, period);
+  var pickerId = scope === 'ov' ? 'anaOvDate' : 'anaEarnDate';
+  var segs = [['today', 'Today'], ['month', 'Monthly'], ['year', 'Yearly']].map(function(p){
+    return '<button type="button" class="ana-seg' + (period === p[0] ? ' on' : '') +
+      '" onclick="anaSetPeriod(\'' + scope + '\',\'' + p[0] + '\')">' + p[1] + '</button>';
+  }).join('');
+  return '<div class="td-card" style="padding:0;overflow:hidden;">' +
+    '<div class="ana-card-head"><h3>Earnings Graph</h3></div>' +
+    '<div class="ana-seg-row"><div class="ana-segs">' + segs + '</div>' +
+      '<span class="ana-seg-tools" id="' + pickerId + 'Mount"></span></div>' +
+    '<div class="ana-cells">' + cellsFn(rows) + '</div>' +
+    '<div class="ana-chart-wrap">' + anaChartHtml(period, rows) + '</div></div>';
+}
+
+/* ════════════ 1 · OVERVIEW ════════════ */
+function anaOverviewHtml(){
+  var courses = (typeof COURSES !== 'undefined' ? COURSES : []);
+  var published = courses.filter(function(c){ return typeof isPublished !== 'function' || isPublished(c); }).length;
+  var reviews = (typeof TUTOR_REVIEWS !== 'undefined' ? TUTOR_REVIEWS : []).length;
+  var avg = (typeof reviewAverage === 'function') ? reviewAverage().toFixed(1) : '—';
+
+  var stats = '<div class="ana-stat-grid">' +
+      '<div class="ana-stat"><div class="ana-stat-ic courses">&#128214;</div><div>' +
+        '<p class="ana-stat-num">' + courses.length + '</p><p class="ana-stat-lab">Courses</p>' +
+        '<p class="ana-stat-sub">' + published + ' published</p></div></div>' +
+      '<div class="ana-stat"><div class="ana-stat-ic students">&#127891;</div><div>' +
+        '<p class="ana-stat-num">' + ST_ROSTER.length + '</p><p class="ana-stat-lab">Students</p>' +
+        '<p class="ana-stat-sub">' + stEnrolmentCount() + ' enrolments</p></div></div>' +
+      '<div class="ana-stat"><div class="ana-stat-ic reviews">&#11088;</div><div>' +
+        '<p class="ana-stat-num">' + reviews + '</p><p class="ana-stat-lab">Reviews</p>' +
+        '<p class="ana-stat-sub">' + avg + ' average</p></div></div>' +
+    '</div>';
+
+  var note = '<p class="ana-note"><b>Why these three differ from dev.</b> dev reads 18 courses, 26 students and 2 ' +
+    'reviews. This page counts what is actually in the file &mdash; <b>' + courses.length + '</b> courses, <b>' +
+    ST_ROSTER.length + '</b> students and <b>' + reviews + '</b> reviews &mdash; because a dashboard that reports ' +
+    'one total while the pages behind it list another is worse than one that disagrees with dev. ' +
+    (ST_AUDIT.mismatches.length
+      ? '<b>Note:</b> ' + ST_AUDIT.mismatches.length + ' course(s) still disagree with the roster.'
+      : 'Every course&rsquo;s enrolment count reconciles with the roster exactly.') + '</p>';
+
+  var graph = anaGraphCard('ov', function(rows){
+    return anaCell('Total Earning', money(clSum(rows, 'payeeEarn'))) +
+           anaCell('Course Enrolled', rows.length) +
+           anaCell('Total Refund', money(0)) +
+           anaCell('Total Discount', money(clSum(rows, 'discount')), true);
+  });
+
+  var refundNote = '<p class="ana-note amber"><b>Total Refund is a real zero, and it turned up a problem.</b> ' +
+    'No order in the ledger has been refunded. But the admin refunds queue holds an <i>approved</i> ' +
+    money(19) + ' refund for <i>Food Safety Fundamentals</i> &mdash; a course that is free and unpublished in the ' +
+    'catalog, so no such sale could ever have happened. Left as found, because fixing it properly means deciding ' +
+    'whether a refund revokes enrolment, and that changes the counts students see. <b>Your call.</b></p>';
+
+  var pop = courses.filter(function(c){ return (c.students || 0) > 0; }).slice().sort(function(a, b){
+    return (b.students || 0) - (a.students || 0);
+  }).slice(0, 5);
+  var popRows = pop.map(function(c){
+    var r = (typeof courseRating === 'function') ? courseRating(c) : null;
+    return '<tr><td><div class="ana-course-cell">' + anaThumb(c) +
+        '<span class="ana-course-title" title="' + c.title.replace(/"/g, '&quot;') + '">' + c.title + '</span></div></td>' +
+      '<td class="ana-num"><span class="ana-learners">' + (c.students || 0) + '</span></td>' +
+      '<td class="ana-num">' + (r != null
+        ? '<span class="ana-rating">&#9733; ' + r.toFixed(1) + '</span>'
+        : '<span class="as-dim">No reviews yet</span>') + '</td></tr>';
+  }).join('');
+
+  return stats + note + graph + refundNote +
+    '<div class="td-card" style="padding:0;overflow:hidden;">' +
+      '<div class="ana-card-head"><h3>Most Popular Courses</h3></div>' +
+      '<table class="ana-table"><thead><tr><th>Course Name</th><th class="ana-num">Total Enrolled</th>' +
+        '<th class="ana-num">Rating</th></tr></thead><tbody>' + popRows + '</tbody></table></div>' +
+    '<p class="ana-note">dev&rsquo;s Most Popular table lists <i>Introduction to Machine Learning &amp; AI with ' +
+      'Python</i>, which is a Career Path degree course and not in this catalog at all. It has not been invented ' +
+      'as a thirteenth course &mdash; these five are the real top five by enrolment.</p>';
+}
+
+/* ════════════ 2 · COURSES ════════════ */
+function anaCoursesHtml(){
+  var q = ((document.getElementById('anaCourseSearch2') || {}).value || '').trim().toLowerCase();
+  var list = (typeof COURSES !== 'undefined' ? COURSES : []).filter(function(c){
+    return !q || c.title.toLowerCase().indexOf(q) !== -1;
+  }).slice().sort(function(a, b){
+    if (anaCoursesSort === 'learners') return (b.students || 0) - (a.students || 0);
+    return anaCourseEarnings(b.id) - anaCourseEarnings(a.id) || (b.students || 0) - (a.students || 0);
+  });
+  var rows = list.map(function(c){
+    var ct = courseContent(c.id);
+    var st = (typeof courseStatus === 'function') ? courseStatus(c) : 'published';
+    var chip = st === 'published' ? ''
+      : '<span class="as-pill ' + (st === 'draft' ? 'missing' : 'pending') + '" style="margin-left:8px;">' +
+        ((typeof TC_LABELS !== 'undefined' && TC_LABELS[st]) ? TC_LABELS[st] : st) + '</span>';
+    return '<tr><td><div class="ana-course-cell">' + anaThumb(c) +
+        '<div><p class="ana-course-title">' + c.title + chip + '</p>' +
+        '<p class="ana-course-meta">Lesson: <b>' + ct.lessons + '</b> &nbsp; Assignment: <b>' +
+          courseAssignmentCount(c.id) + '</b> &nbsp; Quiz: <b>' + ct.quizzes + '</b></p></div></div></td>' +
+      '<td class="ana-num"><span class="ana-learners">' + (c.students || 0) + '</span></td>' +
+      '<td class="ana-num">' + money(anaCourseEarnings(c.id)) +
+        (c.price > 0 ? '' : '<p class="ana-course-meta">free course</p>') + '</td></tr>';
+  }).join('');
+
+  return '<div class="qz-bar2">' +
+      '<div class="qz-search">' + anaSearchIcon() +
+        '<input type="text" id="anaCourseSearch2" placeholder="Search courses&hellip;" oninput="anaRender()"></div>' +
+      '<div class="qz-right"><button type="button" class="qz-iconbtn" onclick="anaToggleCoursesSort()" title="' +
+        (anaCoursesSort === 'earnings' ? 'Sorted by earnings' : 'Sorted by learners') + '">' +
+        anaSortIcon() + '</button></div></div>' +
+    '<p class="ana-note"><b>Lesson and quiz counts are new data.</b> COURSES carried a price and an enrolment ' +
+      'count but never a lesson or quiz count, which this page needs on every row. <b>Assignment counts are ' +
+      'counted from the Assignments page</b> rather than stored a second time, so the two can never drift apart. ' +
+      'Earnings come from the order ledger: ten of the twelve courses are free, so ten rows are honestly ' +
+      money(0) + '. Unpublished courses keep a status chip instead of being hidden.</p>' +
+    '<div class="td-card" style="padding:0;overflow:hidden;">' +
+      '<table class="ana-table"><thead><tr><th>Course Name</th><th class="ana-num">Total Learners</th>' +
+      '<th class="ana-num">Earnings</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+function anaToggleCoursesSort(){
+  anaCoursesSort = anaCoursesSort === 'earnings' ? 'learners' : 'earnings';
+  anaRender();
+}
+
+/* ════════════ 3 · EARNINGS ════════════ */
+function anaEarningsHtml(){
+  var all = COURSE_LEDGER;
+  var earn = clSum(all, 'payeeEarn');
+  var sale = clSum(all, 'amount');
+  var comm = clSum(all, 'platformTake');
+  var fees = Math.round((clSum(all, 'tax') + clSum(all, 'processing')) * 100) / 100;
+  var heldRows = all.filter(function(r){ return clHeld(r).held; });
+  var held = clSum(heldRows, 'payeeEarn');
+  var balance = Math.round((earn - held) * 100) / 100;
+  var nextRelease = heldRows.reduce(function(min, r){
+    var d = clHeld(r).release;
+    return (!min || d < min) ? d : min;
+  }, null);
+
+  var card = function(name, icon, cls, val, sub){
+    return '<div class="ana-money"><div class="ana-money-head"><span>' + name + '</span>' +
+      '<i class="' + cls + '">' + icon + '</i></div>' +
+      '<p class="ana-money-num ' + cls + '">' + val + '</p>' +
+      '<p class="ana-money-sub">' + sub + '</p></div>';
+  };
+  var grid = '<div class="ana-money-grid">' +
+    card('Earnings',    '&#128176;', 'green',  money(earn),    'Total Earning') +
+    card('Balance',     '&#128188;', 'maroon', money(balance), 'Available now') +
+    card('Withdraws',   '&#127974;', 'purple', money(0),       'Total Withdraws') +
+    card('Sale',        '&#128278;', 'cyan',   money(sale),    'Total Sale') +
+    card('Commissions', '&#128181;', 'pink',   money(comm),    'Deducted Commissions') +
+    card('Fees',        '&#129534;', 'amber',  money(fees),    'Tax and processing') +
+    '</div>';
+
+  var heldNote = heldRows.length
+    ? '<b>' + money(held) + ' of it is still held</b> across ' + heldRows.length + ' order' +
+      (heldRows.length === 1 ? '' : 's') + ', releasing from <b>' +
+      nextRelease.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }) +
+      '</b> &mdash; 31 days after each sale, the day after the refund window shuts. That is why Balance sits below ' +
+      'Earnings here while dev shows the two as equal.'
+    : 'Nothing is held right now &mdash; every order has cleared its 31-day refund window.';
+
+  /* The discount example is computed, not typed: find a discounted order and
+     show what the tutor would have earned had the fee been charged on the
+     discounted price instead of the list price. */
+  var disc = null;
+  for (var i = 0; i < all.length; i++){ if (all[i].discount > 0){ disc = all[i]; break; } }
+  var discNote = '';
+  if (disc){
+    var naive = computeCourseSplit(disc.amount, 'organic');
+    discNote = '<p class="ana-note amber"><b>Worth knowing.</b> ' +
+      all.filter(function(r){ return r.discount > 0; }).length + ' of the ' + all.length +
+      ' orders are for <i>' + disc.title + '</i>, which sells at ' + money(disc.amount) + ' against a ' +
+      money(disc.listAmount) + ' list price. The platform fee is charged on the <b>pre-discount</b> amount, so each ' +
+      'returns you ' + money(disc.payeeEarn) + ' rather than the ' + money(naive.payeeEarn) +
+      ' you would get if the fee followed the sale price. The tutor funds the discount &mdash; that is the rule in ' +
+      'the agreement, shown here doing its work.</p>';
+  }
+
+  var graph = anaGraphCard('earn', function(rows){
+    return anaCell('Total Earning', money(clSum(rows, 'payeeEarn'))) +
+           anaCell('Number Of Sales', rows.length) +
+           anaCell('Commission', money(clSum(rows, 'platformTake')), true);
+  });
+
+  return grid +
+    '<p class="ana-note"><b>Every figure here is the engine&rsquo;s, not a typed-in total.</b> ' + money(sale) +
+      ' of sales breaks down into ' + money(fees) + ' tax and processing, ' + money(comm) +
+      ' platform commission and ' + money(earn) + ' to you &mdash; and those three add back to ' + money(sale) +
+      ' exactly. ' + heldNote + '</p>' +
+    discNote + graph;
+}
+
+/* ════════════ 4 · STATEMENTS ════════════ */
+function anaStmtRows(){
+  var q = ((document.getElementById('anaStmtSearch') || {}).value || '').trim().toLowerCase();
+  return COURSE_LEDGER.filter(function(r){
+    if (anaStmtCourse !== 'all' && String(r.courseId) !== String(anaStmtCourse)) return false;
+    if (typeof drInRange === 'function' && !drInRange('anaStmtDate', r.at)) return false;
+    if (q && (r.title + ' ' + r.student + ' ' + r.order).toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  }).slice().sort(function(a, b){
+    return anaStmtNewest ? (a.at < b.at ? 1 : -1) : (a.at > b.at ? 1 : -1);
+  });
+}
+function anaStatementsHtml(){
+  var rows = anaStmtRows();
+  var body = rows.map(function(r){
+    /* The tutor's share of THIS order's net revenue, measured rather than assumed.
+       (1 - rate) is only right when the fee basis equals the sale: on a discounted
+       order the fee is charged on the list price, so the real share is lower —
+       22.67% on the Git orders, not 50%, and printing 50% there would have been a
+       lie sitting right next to the figure that contradicts it. */
+    var pct = r.netRevenue > 0 ? Math.round((r.payeeEarn / r.netRevenue) * 10000) / 100 : 0;
+    return '<tr>' +
+      '<td><span class="as-pill graded">Completed</span>' +
+        '<p class="ana-course-title" style="margin:8px 0 6px;">' + r.title + '</p>' +
+        '<p class="ana-course-meta"><b>' + r.order + '</b> &nbsp; ' + anaDay(r.at) +
+        ' &nbsp; Purchaser: <b>' + r.student + '</b></p></td>' +
+      '<td class="ana-bd"><span>Order Amount: <b>' + money(r.amount) + '</b></span>' +
+        (r.discount > 0 ? '<span>Discount given: <b>&minus;' + money(r.discount) + '</b></span>' : '') +
+        '<span>Tax &amp; processing: <b>&minus;' + money(r.tax + r.processing) + '</b></span>' +
+        '<span>Net Revenue: <b>' + money(r.netRevenue) + '</b></span></td>' +
+      '<td class="ana-num"><p class="ana-earn">' + money(r.payeeEarn) + '</p>' +
+        '<p class="ana-course-meta">' + pct.toFixed(2) + '% of ' + money(r.netRevenue) + '</p></td>' +
+      '<td class="ana-num"><p class="ana-share">' + money(r.platformTake) + '</p>' +
+        '<p class="ana-course-meta">' + Math.round(r.rate * 100) + '% platform fee' +
+        (r.discount > 0 ? '<br>on ' + money(r.listAmount) + ' list' : '') + '</p></td></tr>';
+  }).join('');
+
+  return '<div class="qz-bar">' +
+      '<div class="qz-drop" id="anaStmtDrop"><button type="button" class="qz-drop-btn accent" ' +
+        'onclick="qzToggle(\'anaStmtDrop\')"><span id="anaStmtLabel">All Courses</span> ' +
+        '<span class="chev">&#9662;</span></button><div class="qz-drop-menu" id="anaStmtMenu"></div></div>' +
+      '<div class="qz-right"><span id="anaStmtDateMount"></span>' +
+        '<button type="button" class="qz-iconbtn" onclick="anaFlipStmtSort()" title="' +
+        (anaStmtNewest ? 'Newest first' : 'Oldest first') + '">' + anaSortIcon() + '</button></div></div>' +
+    '<div class="qz-bar2"><div class="qz-search">' + anaSearchIcon() +
+      '<input type="text" id="anaStmtSearch" placeholder="Search order, course or purchaser&hellip;" ' +
+      'oninput="anaRender()"></div></div>' +
+    '<p class="ana-note"><b>' + COURSE_LEDGER.length + ' orders, all real.</b> Each is a paid enrolment from the ' +
+      'student roster, priced from the catalog and split by the live engine. <b>The breakdown departs from dev:</b> ' +
+      'dev shows a flat &ldquo;70.00% of order amount&rdquo; against a &ldquo;30% admin share&rdquo;. This ' +
+      'prototype&rsquo;s model takes tax and payment processing off first and splits the <b>net revenue</b>, so the ' +
+      'columns show that chain rather than a rate that would not reconcile with the agreement.</p>' +
+    (rows.length
+      ? '<div class="td-card" style="padding:0;overflow:hidden;"><table class="ana-table stmt"><thead><tr>' +
+        '<th>Order</th><th>Price Breakdown</th><th class="ana-num">Net Earnings</th>' +
+        '<th class="ana-num">Platform Share</th></tr></thead><tbody>' + body + '</tbody></table></div>'
+      : '<div class="qz-empty">No order matches these filters.</div>');
+}
+function anaFlipStmtSort(){ anaStmtNewest = !anaStmtNewest; anaRender(); }
+
+/* ════════════ 5 · STUDENTS ════════════ */
+function anaStuRows(){
+  var q = ((document.getElementById('anaStuSearch') || {}).value || '').trim().toLowerCase();
+  return ST_ROSTER.filter(function(s){
+    if (anaStuCourse !== 'all' && !stEnrolment(s, anaStuCourse)) return false;
+    if (typeof drInRange === 'function' && !drInRange('anaStuDate', s.reg)) return false;
+    if (q && (s.name + ' ' + s.email).toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  }).slice().sort(function(a, b){
+    return anaStuNewest ? (a.reg < b.reg ? 1 : -1) : (a.reg > b.reg ? 1 : -1);
+  });
+}
+function anaStudentsHtml(){
+  var rows = anaStuRows();
+  var body = rows.map(function(s){
+    var n = anaStuCourse === 'all' ? s.courses.length : 1;
+    return '<tr><td><div class="ana-stu"><span class="ana-av">' + stInitials(s.name) + '</span>' +
+        '<div><p class="ana-stu-name">' + s.name + '</p>' +
+        '<p class="ana-stu-mail">' + s.email + '</p></div></div></td>' +
+      '<td>' + qzWhen(s.reg) + '</td>' +
+      '<td class="ana-num"><span class="ana-learners">' + n + '</span></td></tr>';
+  }).join('');
+
+  return '<div class="qz-bar">' +
+      '<div class="qz-drop" id="anaStuDrop"><button type="button" class="qz-drop-btn accent" ' +
+        'onclick="qzToggle(\'anaStuDrop\')"><span id="anaStuLabel">All Courses</span> ' +
+        '<span class="chev">&#9662;</span></button><div class="qz-drop-menu" id="anaStuMenu"></div></div>' +
+      '<div class="qz-search" style="margin-left:10px;">' + anaSearchIcon() +
+        '<input type="text" id="anaStuSearch" placeholder="Search" oninput="anaRender()"></div>' +
+      '<div class="qz-right"><span id="anaStuDateMount"></span>' +
+        '<button type="button" class="qz-iconbtn" onclick="anaFlipStuSort()" title="' +
+        (anaStuNewest ? 'Newest first' : 'Oldest first') + '">' + anaSortIcon() + '</button></div></div>' +
+    '<p class="ana-note"><b>' + ST_ROSTER.length + ' students, ' + stEnrolmentCount() +
+      ' enrolments</b> &mdash; and every one reconciles with the enrolment count on its course. Five of these names ' +
+      'were already in the file, sitting quizzes and writing reviews, so their enrolments were fixed before this ' +
+      'roster existed. <b>The email addresses are deliberately fake:</b> dev&rsquo;s Students tab shows real people ' +
+      'at real addresses, and those do not belong in a prototype that gets passed around.</p>' +
+    (rows.length
+      ? '<div class="td-card" style="padding:0;overflow:hidden;"><table class="ana-table"><thead><tr>' +
+        '<th>Student Info</th><th>Registration Date</th><th class="ana-num">Course Enrolled</th>' +
+        '</tr></thead><tbody>' + body + '</tbody></table></div>'
+      : '<div class="qz-empty">No student matches these filters.</div>');
+}
+function anaFlipStuSort(){ anaStuNewest = !anaStuNewest; anaRender(); }
+
+/* ════════════ 6 · EXPORT ════════════ */
+function anaExportHtml(){
+  return '<div class="td-card ana-export">' +
+      '<div class="ana-export-text">' +
+        '<h3>Detailed Report of Your<br>Sales &amp; Students</h3>' +
+        '<p>Export to keep a copy of your analytics data.</p>' +
+        '<button type="button" class="btn-primary" onclick="anaDownloadCsv()">&#11015; Download CSV</button>' +
+        '<p class="ana-export-note">This one genuinely downloads. The file is built in the browser from the order ' +
+          'ledger and the student roster &mdash; <b>' + COURSE_LEDGER.length + ' orders</b> and <b>' +
+          ST_ROSTER.length + ' students</b> &mdash; with no server and no network request.</p>' +
+      '</div>' +
+      '<div class="ana-export-art" aria-hidden="true">' +
+        '<svg width="150" height="132" viewBox="0 0 150 132" fill="none">' +
+          '<rect x="26" y="18" width="84" height="102" rx="7" fill="#fff" stroke="#e7b9c6" stroke-width="2"/>' +
+          '<rect x="38" y="8" width="84" height="102" rx="7" fill="#fff" stroke="#d98aa4" stroke-width="2"/>' +
+          '<path d="M50 30h60M50 42h60M50 54h38" stroke="#e7b9c6" stroke-width="3" stroke-linecap="round"/>' +
+          '<circle cx="68" cy="86" r="17" fill="#f6dde4"/><path d="M68 69a17 17 0 0 1 17 17H68z" fill="#c2255c"/>' +
+          '<path d="M94 96l9-14 8 9 10-17" stroke="#630320" stroke-width="3" stroke-linecap="round"/>' +
+        '</svg></div>' +
+    '</div>' +
+    '<p class="ana-note">Two sheets would read better than one CSV, but a real .xlsx needs a library and this file ' +
+      'loads none, so the export is a single CSV with an <b>Orders</b> block followed by a <b>Students</b> block.</p>';
+}
+function anaCsvCell(v){
+  var s = String(v == null ? '' : v).replace(/&rsquo;/g, "'").replace(/&[a-z]+;/g, ' ').replace(/"/g, '""');
+  return /[",\n]/.test(s) ? '"' + s + '"' : s;
+}
+function anaCsvText(){
+  var L = [];
+  L.push('TrioEdX tutor analytics export');
+  L.push('Built by the interactive prototype - figures computed by the live revenue engine');
+  L.push('');
+  L.push('ORDERS');
+  L.push(['Order','Date','Course','Purchaser','Order amount','List price','Discount','Tax','Processing',
+          'Net revenue','Platform fee','Your earnings'].join(','));
+  COURSE_LEDGER.forEach(function(r){
+    L.push([r.order, String(r.at).split('T')[0], r.title, r.student, r.amount.toFixed(2),
+            r.listAmount.toFixed(2), r.discount.toFixed(2), r.tax.toFixed(2), r.processing.toFixed(2),
+            r.netRevenue.toFixed(2), r.platformTake.toFixed(2), r.payeeEarn.toFixed(2)]
+           .map(anaCsvCell).join(','));
+  });
+  L.push('');
+  L.push('STUDENTS');
+  L.push(['Student','Email','Registered','Courses enrolled','Course titles'].join(','));
+  ST_ROSTER.forEach(function(s){
+    var titles = s.courses.map(function(e){
+      var c = courseById(e.id);
+      return c ? c.title : 'Course ' + e.id;
+    }).join(' | ');
+    L.push([s.name, s.email, String(s.reg).split('T')[0], s.courses.length, titles].map(anaCsvCell).join(','));
+  });
+  return L.join('\n');
+}
+function anaDownloadCsv(){
+  var csv = anaCsvText();
+  try {
+    var blob = new Blob(['﻿' + csv], { type:'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'trioedx_tutor_analytics.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  } catch (e){
+    /* If the browser blocks the object URL there is still something useful to show. */
+    cfOpen('<h3>Your export</h3><p class="pc-card-sub">The download was blocked, so here is the file inline ' +
+      '&mdash; select all and copy.</p><textarea readonly style="width:100%;height:280px;font-size:11px;' +
+      'font-family:ui-monospace,monospace;">' + csv.replace(/</g, '&lt;') + '</textarea>' +
+      '<div class="cf-acts"><button type="button" class="pc-btn primary" onclick="cfClose()">Close</button></div>');
+  }
+}
+
+/* ════════════ course dropdowns for Statements and Students ════════════ */
+function anaStmtCount(id){
+  return COURSE_LEDGER.filter(function(r){ return id === 'all' || String(r.courseId) === String(id); }).length;
+}
+function anaStuCount(id){
+  return id === 'all' ? ST_ROSTER.length : stStudentsInCourse(id).length;
+}
+function anaStmtIds(){
+  var ids = [];
+  COURSE_LEDGER.forEach(function(r){ if (ids.indexOf(r.courseId) === -1) ids.push(r.courseId); });
+  return ids.sort(function(a, b){ return a - b; });
+}
+function anaStuIds(){
+  var ids = [];
+  ST_ROSTER.forEach(function(s){
+    s.courses.forEach(function(e){ if (ids.indexOf(e.id) === -1) ids.push(e.id); });
+  });
+  return ids.sort(function(a, b){ return a - b; });
+}
+/* Two small wrappers rather than one clever generic one: the in-menu search box
+   has to name its own re-render in an HTML attribute, and a generic call with
+   JSON arguments inside that attribute is a quoting accident waiting to happen. */
+function anaStmtMenuRender(){
+  anaMenuInto('anaStmtMenu', 'anaStmtLabel', 'anaStmtCourseSearch', 'anaStmtMenuRender()',
+              anaStmtCourse, anaStmtIds(), anaStmtCount, 'anaSetStmtCourse');
+}
+function anaStuMenuRender(){
+  anaMenuInto('anaStuMenu', 'anaStuLabel', 'anaStuCourseSearch', 'anaStuMenuRender()',
+              anaStuCourse, anaStuIds(), anaStuCount, 'anaSetStuCourse');
+}
+function anaMenuInto(menuId, labelId, searchId, reRender, current, ids, countFn, setFn){
+  var menu = document.getElementById(menuId);
+  if (menu){
+    var q = menuFilterText(searchId);
+    var items = [];
+    if (!q || 'all courses'.indexOf(q) !== -1){
+      items.push('<a class="' + (current === 'all' ? 'on' : '') + '" onclick="' + setFn +
+        '(\'all\')">All Courses (' + countFn('all') + ')</a>');
+    }
+    ids.forEach(function(id){
+      var c = courseById(id);
+      var t = c ? c.title : 'Course ' + id;
+      if (q && t.toLowerCase().indexOf(q) === -1) return;
+      items.push('<a class="' + (String(current) === String(id) ? 'on' : '') + '" onclick="' + setFn +
+        '(\'' + id + '\')" title="' + t.replace(/"/g, '&quot;') + '">' + t + ' (' + countFn(id) + ')</a>');
+    });
+    menu.innerHTML = menuSearchHtml(searchId, 'Search Course', reRender) +
+      '<div class="qz-menu-list">' +
+      (items.length ? items.join('') : '<p class="qz-menu-none">No course matches that.</p>') + '</div>';
+    var el = document.getElementById(searchId);
+    if (el && q){ el.value = q; el.focus(); }
+  }
+  var lab = document.getElementById(labelId);
+  if (lab){
+    var cc = current === 'all' ? null : courseById(current);
+    lab.textContent = (cc ? cc.title.slice(0, 30) + (cc.title.length > 30 ? '…' : '') : 'All Courses') +
+      ' (' + countFn(current) + ')';
+  }
+}
+function anaSetStmtCourse(id){
+  anaStmtCourse = id;
+  var d = document.getElementById('anaStmtDrop');
+  if (d) d.classList.remove('open');
+  anaRender();
+}
+function anaSetStuCourse(id){
+  anaStuCourse = id;
+  var d = document.getElementById('anaStuDrop');
+  if (d) d.classList.remove('open');
+  anaRender();
+}
+
+/* ════════════ the shell ════════════ */
+function anaMountPicker(id){
+  var mount = document.getElementById(id + 'Mount');
+  if (!mount) return;
+  mount.innerHTML = drMountHtml(id);
+  var s = drInit(id);
+  s.onApply = function(){ anaRender(); };
+  /* The panel is rebuilt on every render, so the fresh button has to be told
+     what the picker is already set to — otherwise an applied range would keep
+     filtering while its own control looked untouched. */
+  var btn = document.querySelector('[data-drbtn="' + id + '"]');
+  if (btn && s.preset !== 'all') btn.classList.add('on');
+}
+function anaRender(){
+  var tabsEl = document.getElementById('anaTabs');
+  if (tabsEl){
+    tabsEl.innerHTML = ANA_TABS.map(function(t){
+      return '<button type="button" class="ana-tab' + (anaTab === t.key ? ' on' : '') +
+        '" onclick="anaSetTab(\'' + t.key + '\')">' + t.label + '</button>';
+    }).join('');
+  }
+  var panel = document.getElementById('anaPanel');
+  if (!panel) return;
+  /* Typing in a panel search box re-renders the panel the box lives in, so
+     remember where the cursor was and put it back afterwards. */
+  var focusId = null, focusVal = '', caret = 0;
+  var act = document.activeElement;
+  if (act && act.tagName === 'INPUT' && act.id && act.id.indexOf('ana') === 0){
+    focusId = act.id; focusVal = act.value; caret = act.selectionStart;
+  }
+  if (anaTab === 'overview')        panel.innerHTML = anaOverviewHtml();
+  else if (anaTab === 'courses')    panel.innerHTML = anaCoursesHtml();
+  else if (anaTab === 'earnings')   panel.innerHTML = anaEarningsHtml();
+  else if (anaTab === 'statements') panel.innerHTML = anaStatementsHtml();
+  else if (anaTab === 'students')   panel.innerHTML = anaStudentsHtml();
+  else                              panel.innerHTML = anaExportHtml();
+
+  if (anaTab === 'overview')   anaMountPicker('anaOvDate');
+  if (anaTab === 'earnings')   anaMountPicker('anaEarnDate');
+  if (anaTab === 'statements'){ anaMountPicker('anaStmtDate'); anaStmtMenuRender(); }
+  if (anaTab === 'students'){   anaMountPicker('anaStuDate');  anaStuMenuRender(); }
+
+  if (focusId){
+    var again = document.getElementById(focusId);
+    if (again){
+      again.value = focusVal;
+      again.focus();
+      try { again.setSelectionRange(caret, caret); } catch (e){}
+    }
+  }
+}
+function renderTutorAnalytics(){
+  tdMountShell('screen-tutor-analytics', 'analytics');
+  anaRender();
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   v52 — TUTOR: REVIEWS
+   ------------------------------------------------------------
+   Your screenshot is an overlay — back arrow, close button, no
+   sidebar — but you asked for a page under the Tutor Dashboard,
+   so this is a full dashboard page with the shell and the
+   Switch-to-Student band every other tutor page carries. The
+   cards themselves follow the screenshot: type chip, subject,
+   "Reviewed on", stars, body, reviewer.
+
+   What the screenshot does not have and this does: a summary with
+   the star spread, filters (type, rating, search, date range) and
+   a public reply.
+════════════════════════════════════════════════════════════ */
+
+var rvType = 'all', rvStars = 'all', rvNewestFirst = true, rvOnlyUnreplied = false;
+
+function rvMatches(r, ignore){
+  if (ignore !== 'type' && rvType !== 'all' && r.type !== rvType) return false;
+  if (ignore !== 'stars' && rvStars !== 'all' && String(r.stars) !== String(rvStars)) return false;
+  if (rvOnlyUnreplied && r.reply) return false;
+  if (typeof drInRange === 'function' && !drInRange('rvDate', reviewDateIso(r))) return false;
+  var q = ((document.getElementById('rvSearch') || {}).value || '').trim().toLowerCase();
+  if (q){
+    var hay = (r.text + ' ' + r.student + ' ' + reviewSubject(r) +
+               ' ' + (r.reply ? r.reply.text : '')).toLowerCase();
+    if (hay.indexOf(q) === -1) return false;
+  }
+  return true;
+}
+function rvCountForType(t){
+  return TUTOR_REVIEWS.filter(function(r){
+    return (t === 'all' || r.type === t) && rvMatches(r, 'type');
+  }).length;
+}
+function rvCountForStars(s){
+  return TUTOR_REVIEWS.filter(function(r){
+    return (s === 'all' || String(r.stars) === String(s)) && rvMatches(r, 'stars');
+  }).length;
+}
+function rvSetType(t){
+  rvType = t;
+  var d = document.getElementById('rvTypeDrop');
+  if (d) d.classList.remove('open');
+  rvRender();
+}
+function rvSetStars(s){
+  rvStars = s;
+  var d = document.getElementById('rvStarDrop');
+  if (d) d.classList.remove('open');
+  rvRender();
+}
+function rvToggleSort(){
+  rvNewestFirst = !rvNewestFirst;
+  rvRender();
+}
+function rvToggleUnreplied(){
+  rvOnlyUnreplied = !rvOnlyUnreplied;
+  rvRender();
+}
+function rvTypeChip(t){
+  var icon = t === 'course' ? '&#128214;' : (t === 'lesson' ? '&#128101;' : '&#127979;');
+  return '<span class="rv-chip ' + t + '">' + icon + ' ' + reviewTypeLabel(t) + '</span>';
+}
+function rvCardHtml(r){
+  var reply = r.reply
+    ? '<div class="rv-reply"><p class="rv-reply-head">Your reply ' +
+        '<span>&middot; ' + (r.reply.daysAgo === 0 ? 'just now' : agoLabel(r.reply.daysAgo)) + '</span>' +
+        '<button type="button" class="as-linkbtn" onclick="rvReply(\'' + r.id + '\')">Edit</button>' +
+        '<button type="button" class="as-linkbtn" onclick="rvAskRemoveReply(\'' + r.id + '\')">Remove</button></p>' +
+        '<p class="rv-reply-text">' + r.reply.text + '</p></div>'
+    : '<div class="rv-acts"><button type="button" class="pc-btn" onclick="rvReply(\'' + r.id + '\')">' +
+        '&#8617; Reply publicly</button>' +
+        '<span class="rv-await">Not replied to yet</span></div>';
+  return '<div class="rv-card">' +
+    '<div class="rv-card-top">' + rvTypeChip(r.type) +
+      '<span class="rv-id">' + r.id + '</span></div>' +
+    '<p class="rv-subject">' + reviewSubject(r) + '</p>' +
+    '<p class="rv-on">Reviewed on: ' + reviewDayLabel(r) +
+      (r.edited ? ' <span class="rv-edited">edited</span>' : '') + '</p>' +
+    '<div class="rv-body">' +
+      '<div class="rv-stars">' + starsHtml(r.stars) + '</div>' +
+      '<p class="rv-text">' + r.text + '</p>' +
+      '<div class="rv-who"><span class="rv-av">' + r.initials + '</span>' +
+        '<div><p class="rv-name">' + r.student + '</p><p class="rv-role">Student</p></div></div>' +
+      reply +
+    '</div></div>';
+}
+function rvRender(){
+  var list = document.getElementById('rvList');
+  if (!list) return;
+  var mount = document.getElementById('rvDateMount');
+  if (mount && !document.getElementById('rvDate')){
+    mount.innerHTML = drMountHtml('rvDate');
+    drInit('rvDate').onApply = function(){ rvRender(); };
+  }
+
+  /* ── summary: average, count, the star spread, and per type ── */
+  var sum = document.getElementById('rvSummary');
+  if (sum){
+    var dist = starDistribution();
+    var total = TUTOR_REVIEWS.length;
+    var bars = '';
+    for (var s = 5; s >= 1; s--){
+      var n = dist[s - 1];
+      var pct = total ? (n / total) * 100 : 0;
+      bars += '<div class="rv-bar-row"><span class="rv-bar-lab">' + s + '&#9733;</span>' +
+        '<span class="rv-bar"><i style="width:' + pct.toFixed(1) + '%;"></i></span>' +
+        '<span class="rv-bar-n">' + n + '</span></div>';
+    }
+    var perType = REVIEW_TYPES.map(function(t){
+      var a = reviewAverageFor(t.key), c = reviewsOfType(t.key).length;
+      return '<div class="rv-type-stat"><p class="rv-type-lab">' + t.label + '</p>' +
+        '<p class="rv-type-val">' + (a == null ? '&mdash;' : '&#9733; ' + a.toFixed(1)) +
+        '</p><p class="rv-type-n">' + c + (c === 1 ? ' review' : ' reviews') + '</p></div>';
+    }).join('');
+    sum.innerHTML =
+      '<div class="rv-sum-big"><p class="rv-sum-num">' + reviewAverage().toFixed(1) + '</p>' +
+        '<div class="rv-stars big">' + starsHtml(Math.round(reviewAverage())) + '</div>' +
+        '<p class="rv-sum-sub">' + total + (total === 1 ? ' review' : ' reviews') + ' in total</p></div>' +
+      '<div class="rv-bars">' + bars + '</div>' +
+      '<div class="rv-types">' + perType + '</div>';
+  }
+
+  /* ── filters ── */
+  var tm = document.getElementById('rvTypeMenu');
+  if (tm){
+    tm.innerHTML = '<a class="' + (rvType === 'all' ? 'on' : '') + '" onclick="rvSetType(\'all\')">All types (' +
+      rvCountForType('all') + ')</a>' +
+      REVIEW_TYPES.map(function(t){
+        return '<a class="' + (rvType === t.key ? 'on' : '') + '" onclick="rvSetType(\'' + t.key + '\')">' +
+          t.label + ' (' + rvCountForType(t.key) + ')</a>';
+      }).join('');
+  }
+  var tl = document.getElementById('rvTypeLabel');
+  if (tl) tl.textContent = (rvType === 'all' ? 'All types' : reviewTypeLabel(rvType)) +
+    ' (' + rvCountForType(rvType) + ')';
+
+  var sm = document.getElementById('rvStarMenu');
+  if (sm){
+    var items = ['<a class="' + (rvStars === 'all' ? 'on' : '') +
+      '" onclick="rvSetStars(\'all\')">All ratings (' + rvCountForStars('all') + ')</a>'];
+    for (var k = 5; k >= 1; k--){
+      items.push('<a class="' + (String(rvStars) === String(k) ? 'on' : '') + '" onclick="rvSetStars(\'' + k +
+        '\')">' + k + ' star' + (k === 1 ? '' : 's') + ' (' + rvCountForStars(k) + ')</a>');
+    }
+    sm.innerHTML = items.join('');
+  }
+  var sl = document.getElementById('rvStarLabel');
+  if (sl) sl.textContent = (rvStars === 'all' ? 'All ratings' : rvStars + ' star' + (rvStars === '1' ? '' : 's')) +
+    ' (' + rvCountForStars(rvStars) + ')';
+
+  var ub = document.getElementById('rvUnrepliedBtn');
+  if (ub){
+    ub.classList.toggle('on', rvOnlyUnreplied);
+    ub.innerHTML = 'Awaiting reply (' + reviewsAwaitingReply() + ')';
+  }
+  var sb = document.getElementById('rvSortBtn');
+  if (sb) sb.title = rvNewestFirst ? 'Newest first' : 'Oldest first';
+
+  /* ── the cards ── */
+  var rows = TUTOR_REVIEWS.filter(function(r){ return rvMatches(r); }).slice().sort(function(a, b){
+    return rvNewestFirst ? a.daysAgo - b.daysAgo : b.daysAgo - a.daysAgo;
+  });
+  list.innerHTML = rows.map(rvCardHtml).join('');
+  var empty = document.getElementById('rvEmpty');
+  if (empty){
+    if (rows.length){ empty.style.display = 'none'; }
+    else {
+      empty.innerHTML = TUTOR_REVIEWS.length
+        ? 'No review matches these filters. Clear them to see all ' + TUTOR_REVIEWS.length + '.'
+        : 'No reviews yet. They appear here as students write them from <b>My&nbsp;Reviews</b> in their dashboard.';
+      empty.style.display = '';
+    }
+  }
+  var shown = document.getElementById('rvShowing');
+  if (shown) shown.textContent = rows.length + ' of ' + TUTOR_REVIEWS.length;
+}
+
+/* ── replying ── */
+function rvReply(id){
+  var r = reviewById(id);
+  if (!r) return;
+  cfOpen(
+    '<h3>' + (r.reply ? 'Edit your reply' : 'Reply publicly') + '</h3>' +
+    '<p class="an-form-err" id="rvErr"></p>' +
+    '<div class="rv-quote"><div class="rv-stars">' + starsHtml(r.stars) + '</div>' +
+      '<p>' + r.text + '</p><p class="rv-quote-who">' + r.student + ' &mdash; ' + reviewSubject(r) + '</p></div>' +
+    '<div class="an-form-row"><label>Your reply</label>' +
+      '<textarea id="rvFText" placeholder="Answer the point they made. Everyone who reads the review reads this too.">' +
+      (r.reply ? r.reply.text : '') + '</textarea></div>' +
+    '<p class="pc-card-sub" style="margin:0;">This is <b>public</b> and sits under the review wherever the review ' +
+      'appears. One reply per review — editing replaces it.</p>' +
+    '<div class="cf-acts">' +
+      '<button type="button" class="pc-btn" onclick="cfClose()">Cancel</button>' +
+      '<button type="button" class="pc-btn primary" onclick="rvSaveReply(\'' + r.id + '\')">' +
+      (r.reply ? 'Save reply' : 'Post reply') + '</button></div>');
+}
+function rvSaveReply(id){
+  var text = ((document.getElementById('rvFText') || {}).value || '').trim();
+  var err = document.getElementById('rvErr');
+  if (text.split(/\s+/).filter(Boolean).length < 5){
+    if (err){ err.textContent = 'A reply of fewer than five words reads worse than no reply. Say something.';
+              err.style.display = 'block'; }
+    return;
+  }
+  setReviewReply(id, text);
+  cfClose();
+  rvRender();
+}
+/* The consequence before the confirm — the v46 house rule. */
+function rvAskRemoveReply(id){
+  var r = reviewById(id);
+  if (!r || !r.reply) return;
+  cfOpen(
+    '<h3>Remove your reply?</h3>' +
+    '<p class="pc-card-sub">The review itself stays — you cannot delete a student’s review, and removing your ' +
+      'reply does not change their rating. What goes is your side of it:</p>' +
+    '<div class="rv-quote"><p>' + r.reply.text + '</p></div>' +
+    '<div class="cf-acts">' +
+      '<button type="button" class="pc-btn" onclick="cfClose()">Keep it</button>' +
+      '<button type="button" class="pc-btn danger" onclick="rvDoRemoveReply(\'' + r.id + '\')">' +
+      'Remove reply</button></div>');
+}
+function rvDoRemoveReply(id){
+  clearReviewReply(id);
+  cfClose();
+  rvRender();
+}
+function renderTutorReviews(){
+  tdMountShell('screen-tutor-reviews', 'reviews');
+  rvRender();
+}
+
+/* ════════════════════════════════════════════════════════════
+   v52 — STUDENT: MY REVIEWS
+   ------------------------------------------------------------
+   v49 shipped a tutor reviews section and noted in the change
+   index that "students still have no way to write one, which is a
+   gap in its own right". This closes it.
+
+   Two sections: what you are entitled to review, and what you
+   have written. Entitlement is derived from what the prototype
+   already knows you did — your enrolments, the 1-on-1 lessons
+   taught to you, the cohort you sat in — so nobody can review a
+   course they never took.
+
+   Reviews publish immediately. There is no moderation queue: that
+   was the third option and it was not the one chosen, so the
+   honest thing is to say so rather than imply a review is checked
+   before it goes live.
+════════════════════════════════════════════════════════════ */
+
+var svDraftStars = 0;
+var svEditing = null;
+
+function svMe(){ return (typeof sdName === 'function') ? sdName() : (authState.name || 'Student1 TrioEdX'); }
+function svStarPicker(n){
+  var out = '';
+  for (var i = 1; i <= 5; i++){
+    out += '<button type="button" class="sv-star' + (i <= n ? ' on' : '') +
+      '" onclick="svPickStars(' + i + ')" title="' + i + ' star' + (i === 1 ? '' : 's') + '" ' +
+      'aria-label="' + i + ' star' + (i === 1 ? '' : 's') + '">&#9733;</button>';
+  }
+  return out;
+}
+function svPickStars(n){
+  svDraftStars = n;
+  var wrap = document.getElementById('svStars');
+  if (wrap) wrap.innerHTML = svStarPicker(n);
+  var lab = document.getElementById('svStarsLab');
+  if (lab){
+    var words = ['', 'Poor', 'Below what I expected', 'Fine', 'Good', 'Excellent'];
+    lab.textContent = n ? n + ' — ' + words[n] : 'Pick a rating';
+  }
+}
+function svWordCount(id){
+  var el = document.getElementById(id);
+  var n = el ? el.value.trim().split(/\s+/).filter(Boolean).length : 0;
+  var out = document.getElementById('svWords');
+  if (out){
+    out.textContent = n + ' / 15 words minimum';
+    out.className = 'sv-words' + (n >= 15 ? ' ok' : '');
+  }
+  return n;
+}
+/* ── the write / edit sheet ──
+   Only (type, key) travel through the onclick attribute; the title and course
+   id are looked up on the other side. Course titles here contain quotes,
+   apostrophes, ampersands and non-Latin scripts, and threading one of those
+   through an HTML attribute and back into a JS string literal is a quoting
+   accident waiting to happen. ── */
+function svFindItem(type, key){
+  var items = reviewableFor(svMe());
+  for (var i = 0; i < items.length; i++){
+    if (items[i].type === type && String(items[i].key) === String(key)) return items[i];
+  }
+  return null;
+}
+function svWrite(type, key){
+  var it = svFindItem(type, key);
+  if (!it) return;
+  svEditing = null;
+  svDraftStars = 0;
+  svSheet(type, key, it.subject, it.courseId, null);
+}
+function svEdit(id){
+  var r = reviewById(id);
+  if (!r) return;
+  svEditing = id;
+  svDraftStars = r.stars;
+  svSheet(r.type, r.type === 'course' ? r.courseId : r.refId, reviewSubject(r), r.courseId, r);
+}
+function svSheet(type, key, subject, courseId, r){
+  cfOpen(
+    '<h3>' + (r ? 'Edit your review' : 'Write a review') + '</h3>' +
+    '<p class="an-form-err" id="svErr"></p>' +
+    '<p class="pc-card-sub" style="margin:0 0 14px;">' + reviewTypeLabel(type) + '<br><b>' + subject + '</b></p>' +
+    '<div class="an-form-row"><label>Your rating</label>' +
+      '<div class="sv-star-row"><span id="svStars">' + svStarPicker(svDraftStars) + '</span>' +
+      '<span class="sv-stars-lab" id="svStarsLab">' + (svDraftStars ? '' : 'Pick a rating') + '</span></div></div>' +
+    '<div class="an-form-row"><label>Your review</label>' +
+      '<textarea id="svFText" oninput="svWordCount(\'svFText\')" ' +
+      'placeholder="What did it actually do for you? Specifics help the next student more than praise.">' +
+      (r ? r.text : '') + '</textarea>' +
+      '<p class="sv-words" id="svWords">0 / 15 words minimum</p></div>' +
+    '<p class="pc-card-sub" style="margin:0;">This publishes <b>straight away</b> under your name, and the tutor can ' +
+      'reply to it in public. You can edit or delete it afterwards.</p>' +
+    '<div class="cf-acts">' +
+      '<button type="button" class="pc-btn" onclick="cfClose()">Cancel</button>' +
+      '<button type="button" class="pc-btn primary" onclick="svSave(\'' + type + '\',\'' + key + '\')">' +
+      (r ? 'Save changes' : 'Publish review') + '</button></div>');
+  svPickStars(svDraftStars);
+  svWordCount('svFText');
+}
+function svSave(type, key){
+  var text = ((document.getElementById('svFText') || {}).value || '').trim();
+  var err = document.getElementById('svErr');
+  var show = function(m){ if (err){ err.textContent = m; err.style.display = 'block'; } };
+  if (!svDraftStars){ show('Pick a star rating first.'); return; }
+  if (text.split(/\s+/).filter(Boolean).length < 15){
+    show('Fifteen words minimum — a one-line review helps nobody decide.');
+    return;
+  }
+  if (svEditing){
+    updateReview(svEditing, svDraftStars, text);
+  } else {
+    var it = svFindItem(type, key);
+    if (!it){ show('That item is no longer available to review.'); return; }
+    addReview({ type:type, courseId:it.courseId, refId:type === 'course' ? null : key,
+                subject:type === 'course' ? null : it.subject,
+                student:svMe(), stars:svDraftStars, text:text });
+  }
+  svEditing = null;
+  cfClose();
+  svRender();
+}
+function svAskDelete(id){
+  var r = reviewById(id);
+  if (!r) return;
+  cfOpen(
+    '<h3>Delete your review?</h3>' +
+    '<p class="pc-card-sub">Before you confirm, what this does:</p>' +
+    '<ul class="sv-conseq"><li>Your ' + r.stars + '-star rating stops counting towards the tutor&rsquo;s average, ' +
+      'which is <b>' + reviewAverage().toFixed(1) + '</b> now.</li>' +
+      (r.reply ? '<li>The tutor&rsquo;s public reply goes with it.</li>' : '') +
+      '<li>You keep the right to write a new one — it moves back to <b>Ready to review</b>.</li></ul>' +
+    '<div class="rv-quote"><p>' + r.text + '</p></div>' +
+    '<div class="cf-acts">' +
+      '<button type="button" class="pc-btn" onclick="cfClose()">Keep it</button>' +
+      '<button type="button" class="pc-btn danger" onclick="svDoDelete(\'' + r.id + '\')">Delete review</button></div>');
+}
+function svDoDelete(id){
+  deleteReview(id);
+  cfClose();
+  svRender();
+}
+/* ── the screen ── */
+function svRender(){
+  if (typeof sdMountShell === 'function') sdMountShell('sdRev', 'reviews');
+  var me = svMe();
+
+  var todo = document.getElementById('svTodo');
+  if (todo){
+    var items = reviewableFor(me);
+    todo.innerHTML = items.length
+      ? items.map(function(it){
+          return '<div class="sv-todo-row">' + rvTypeChip(it.type) +
+            '<span class="sv-todo-title">' + it.subject + '</span>' +
+            '<button type="button" class="pc-btn primary" onclick="svWrite(\'' + it.type + '\',\'' + it.key +
+              '\')">Write a review</button></div>';
+        }).join('')
+      : '<div class="qz-empty">Nothing waiting. You have reviewed everything you have taken so far &mdash; ' +
+        'finish another course or lesson and it turns up here.</div>';
+    var n = document.getElementById('svTodoCount');
+    if (n) n.textContent = items.length;
+  }
+
+  var mine = document.getElementById('svMine');
+  if (mine){
+    var rs = reviewsBy(me).slice().sort(function(a, b){ return a.daysAgo - b.daysAgo; });
+    mine.innerHTML = rs.length
+      ? rs.map(function(r){
+          return '<div class="rv-card">' +
+            '<div class="rv-card-top">' + rvTypeChip(r.type) +
+              '<span class="rv-pub">Published</span>' +
+              '<span class="rv-id">' + r.id + '</span></div>' +
+            '<p class="rv-subject">' + reviewSubject(r) + '</p>' +
+            '<p class="rv-on">You reviewed this on ' + reviewDayLabel(r) +
+              (r.edited ? ' <span class="rv-edited">edited</span>' : '') + '</p>' +
+            '<div class="rv-body"><div class="rv-stars">' + starsHtml(r.stars) + '</div>' +
+              '<p class="rv-text">' + r.text + '</p>' +
+              (r.reply
+                ? '<div class="rv-reply"><p class="rv-reply-head">The tutor replied ' +
+                  '<span>&middot; ' + (r.reply.daysAgo === 0 ? 'just now' : agoLabel(r.reply.daysAgo)) +
+                  '</span></p><p class="rv-reply-text">' + r.reply.text + '</p></div>'
+                : '') +
+              '<div class="rv-acts">' +
+                '<button type="button" class="pc-btn" onclick="svEdit(\'' + r.id + '\')">Edit</button>' +
+                '<button type="button" class="pc-btn" onclick="svAskDelete(\'' + r.id + '\')">Delete</button>' +
+              '</div>' +
+            '</div></div>';
+        }).join('')
+      : '<div class="qz-empty">You have not written a review yet. Anything you can review is listed above.</div>';
+    var m = document.getElementById('svMineCount');
+    if (m) m.textContent = rs.length;
+  }
+
+  var who = document.getElementById('svWho');
+  if (who){
+    who.innerHTML = 'Signed in as <b>' + me + '</b>. Entitlement is worked out from what this account actually ' +
+      'did &mdash; switch account with <b>View&nbsp;as</b> in the ribbon and both lists change.';
+  }
+}
+function renderStudentReviews(){ svRender(); }
+
 /* --- wireframe review affordances --- */
 function setViewAs(role){
   /* Brief item 8 — the demo switcher signs in through the same path login uses,
@@ -8907,6 +11266,20 @@ window.addEventListener('hashchange', routeFromHash);
 
 /* --- change index --- */
 var V361_CHANGES = [
+  ['v52 · Tutor', 'Reviews', 'screen-tutor-reviews', '<b>New screen.</b> Reviews had no page: four sat in a section on Home and a count sat on the Analytics Overview. This is the dev card layout &mdash; type chip, subject, &ldquo;Reviewed on&rdquo;, stars, body, reviewer &mdash; plus a summary with the star spread and per-type averages, filters for type, rating, text and date range, and an <b>Awaiting reply</b> filter. <b>Two departures:</b> your screenshot is an overlay with no sidebar, but you asked for a dashboard page, so it has the shell and the Switch-to-Student band; and dev shows 2 reviews where this has 6.'],
+  ['v52 · Tutor', 'Replying to a review works', 'screen-tutor-reviews', '<b>New.</b> One public reply per review, editable and removable, and the seeded reply is on the <b>4-star</b> review because that is the case a reply feature exists for. Removing a reply states first what it does and does not do &mdash; the review stays, the rating does not move &mdash; before the confirm button, the same house rule v46 set for cancellations.'],
+  ['v52 · Student', 'Students can finally write a review', 'screen-student-reviews', '<b>New screen, closing a gap this prototype flagged on itself.</b> v49&rsquo;s change index said &ldquo;students still have no way to write one, which is a gap in its own right&rdquo;. They now have <b>My Reviews</b>: what they are entitled to review, and what they have written, with edit and delete. <b>Entitlement is derived</b> from their enrolments, the 1-on-1 lessons taught to them and the cohort they sat in, so nobody can review a course they never took. Star picker, a 15-word minimum, and reviews publish immediately &mdash; there is no moderation queue, and the screen says so rather than implying one.'],
+  ['v52 · Reviews', 'Lessons and classes can be reviewed too', 'screen-tutor-reviews', '<b>New.</b> A review now carries a <b>type</b> &mdash; course, 1-on-1 lesson or group class &mdash; instead of assuming a course. The lesson and class reviews are not invented history: they attach to sessions this prototype has recorded as <i>taught</i> since v46, in the tutor&rsquo;s own held-funds list. One array serves all three, so there is nothing to keep in sync.'],
+  ['v52 · Fixed', 'A lesson review would have been labelled &ldquo;Course&rdquo;', 'screen-tutor-home', '<b>Fixed.</b> Home&rsquo;s reviews section looked its course up by id and fell back to the bare word &ldquo;Course&rdquo; when it found nothing &mdash; which is what every lesson and class review would have hit. It now names whatever the review is actually about, and shows the tutor&rsquo;s reply underneath.'],
+  ['v52 · Rating', 'Your rating spans all three types', 'screen-tutor-home', '<b>Changed, and worth knowing.</b> The headline Avg.&nbsp;Rating now averages courses, lessons and classes &mdash; it is <b>your</b> rating, not the catalog&rsquo;s. A course&rsquo;s own rating still counts course reviews only, so no course is marked down for a lesson. Everything derives from the one array: write, edit, delete or reply and the Home stat card, the Analytics average and the per-course ratings all move together.'],
+  ['v51 · Tutor', 'Analytics &mdash; all six tabs', 'screen-tutor-analytics', '<b>New screen, replacing a placeholder.</b> Your six screenshots covered every tab, so all six are built rather than one plus five &ldquo;coming soon&rdquo; panels: <b>Overview</b> (three stat cards, the Earnings Graph, Most Popular Courses), <b>Courses</b> (lesson / assignment / quiz counts, learners, earnings), <b>Earnings</b> (six money cards and a real bar chart), <b>Statements</b> (nine orders with the full price breakdown), <b>Students</b> (the roster) and <b>Export</b> (a CSV that genuinely downloads). Every figure is computed &mdash; the money by the same revenue engine the checkout uses.'],
+  ['v51 · Tutor', 'Assignments', 'screen-tutor-assign', '<b>New screen, replacing a placeholder.</b> Course dropdown with its own Search&nbsp;Course box, status filter, search, the shared date picker and sort. <b>Departing from the last three rounds:</b> dev&rsquo;s page is genuinely empty, so rather than ship four dead controls this seeds <b>six</b> assignments across the published courses &mdash; each naming a student really enrolled there. Grading works: enter a mark and the row, the ring and the filter counts all move. dev&rsquo;s empty state is still one filter click away.'],
+  ['v51 · Tutor', 'Home &mdash; the All Time filter is real', 'screen-tutor-home', '<b>Fixed.</b> The pill fired an alert saying it &ldquo;would change the reporting period&rdquo;. It now opens the <b>same picker v50 built</b> &mdash; third mount of one component, not a third implementation &mdash; and a new card under it recounts <b>course sales, new students, enrolments and reviews</b> for whatever range you pick. The reviews list at the bottom filters too. <b>Both charts now say plainly that the range does not reach them:</b> they are illustrative shapes, and a range cannot filter a drawing.'],
+  ['v51 · Data', 'A student roster, at last', 'screen-tutor-analytics', '<b>New.</b> The prototype knew 26 students as a typed-in number and nothing more. There are now <b>23 named students with registration dates and per-course enrolment dates</b>, reconciling exactly with every course&rsquo;s enrolment count. 23, not 26: five of those students already sat quizzes and wrote reviews here, which fixed their enrolments, and the arithmetic only closes at 23. The headline figure is <b>derived</b> now &mdash; the same fix v48 made to the course count and v49 to the rating.'],
+  ['v51 · Money', 'Nine real course orders', 'screen-tutor-analytics', '<b>New.</b> Every paid enrolment is now an order priced from the catalog and split by the live engine: <b>$309.91 of sales</b> &rarr; tax and processing, platform commission, and your share, and the three add back to $309.91 exactly. Two orders show the agreement&rsquo;s discount rule doing its work &mdash; <i>Git &amp; GitHub</i> sells below its list price, the platform fee is charged on the list price, and the tutor funds the difference. Home&rsquo;s Total Earnings adds this ledger in, so the two screens agree.'],
+  ['v51 · Fixed', 'A quiz attempt in a course with nobody in it', 'screen-tutor-courses', '<b>Fixed.</b> <i>Learn Tajweed with Zin</i> showed <b>0 enrolments</b> while Priya Sharma had been sitting its quiz since v49. Building the roster made the contradiction impossible to miss. Now 1 enrolment &mdash; hers.'],
+  ['v51 · Flagged', 'A refund for a course that was never for sale', 'screen-admin-refunds', '<b>Not fixed &mdash; your decision.</b> The refunds queue holds an <i>approved</i> $19.00 refund for <i>Food Safety Fundamentals</i>, which is <b>free and unpublished</b> in the catalog, so no such sale could have happened. Fixing it properly means deciding whether a refund revokes enrolment, and that changes the counts students see, so it is flagged on the Analytics Overview tab instead of quietly rewritten.'],
+  ['v51 · Tutor', 'One placeholder left', 'screen-tutor-soon', '<b>Updated.</b> Of the eight sidebar items marked &ldquo;not built&rdquo; in v43, <b>one remains</b>: Certificates. Assignments and Analytics both have real screens now.'],
   ['v50 · Tutor', 'Announcements', 'screen-tutor-announce', '<b>New screen, replacing a placeholder.</b> The dev page: course dropdown with its own <b>Search Course</b> box, <b>+ New Announcement</b>, search, date-range picker and sort, and cards carrying the megaphone, timestamp, title, body and target course. <b>Fully working</b> — compose, edit and delete all change the list, and the dropdown count is read from the list so the two cannot disagree. Seeds <b>4</b> announcements rather than dev&rsquo;s 1, so the filters have something to act on.'],
   ['v50 · Tutor', 'The date-range picker is real', 'screen-tutor-quizzes', '<b>Fixed.</b> v49 treated the calendar icon as decorative and put an alert behind it. Your screenshots show a full control: eight presets, a two-month calendar with &lsaquo;&nbsp;&rsaquo; navigation and today circled, clickable start and end dates, Clear&nbsp;Selection and Apply. Built <b>once</b> and mounted on both Announcements and Quiz&nbsp;Attempts, since dev shows the same control on both. Presets and custom ranges both filter for real.'],
   ['v50 · Tutor', 'Quiz Attempts — dropdown search and dev ordering', 'screen-tutor-quizzes', '<b>Updated.</b> The course dropdown gains dev&rsquo;s in-menu <b>Search Course</b> box, and the result filter is reordered to dev&rsquo;s sequence — All, Pending, Failed, Passed.'],
@@ -8989,7 +11362,7 @@ var V361_CHANGES = [
   ['Shared', 'Payment', 'screen-pay-checkout', 'My Dashboard button in the header next to the user name.'],
   ['Shared', 'Payment confirmation', 'screen-pay-confirm', 'My Dashboard button in the header next to the user name.'],
   ['Destination', 'Student dashboard — home', 'screen-student-home', 'Where a student lands when they click My Dashboard.'],
-  ['Reference', 'v50 — what changed (this index)', 'screen-v361-changes', 'This table, clickable, inside the wireframe.']
+  ['Reference', 'v52 — what changed (this index)', 'screen-v361-changes', 'This table, clickable, inside the wireframe.']
 ];
 function renderV361Changes(){
   var body = document.getElementById('chgTableBody');
@@ -11566,7 +13939,9 @@ var AIWF_B64 = "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNo
 ════════════════════════════════════════════════════════════ */
 var COURSES = [
   { id:1, title:'Learn Tajweed with Zin', thumbGrad:'linear-gradient(145deg,#0f3d2e,#2f7a5c)', thumbLabel:'📖 Tajweed',
-    students:0, duration:null, instructor:'Mohamed Zin', instructorInitials:'MZ', category:[], tags:['Tajweed','Arabic pronunciation','Islamic studies'],
+    /* v51 — was 0, which contradicted QZ_ATTEMPTS: Priya Sharma has sat this
+       course's quiz since v49. One enrolment, hers, makes the two agree. */
+    students:1, duration:null, instructor:'Mohamed Zin', instructorInitials:'MZ', category:[], tags:['Tajweed','Arabic pronunciation','Islamic studies'],
     level:'Beginner', price:0, cta:'Start Learning', releaseOrder:12 },
   { id:2, title:'Food Safety Fundamentals', thumbGrad:'linear-gradient(145deg,#0d5f6b,#5fb3c2)', thumbLabel:'🍎 Food Safety',
     students:0, duration:'2h30m', instructor:'Helawit Gizaw', instructorInitials:'HG', category:['Lifestyle'], tags:['education training'],
@@ -12003,7 +14378,8 @@ var SD_NAV_ITEMS = [
   { key: 'notes', label: 'Notes', icon: 'notes' },
   { key: 'discussions', label: 'Discussions', icon: 'discussions' },
   { key: 'calendar', label: 'Calendar', icon: 'calendar' },
-  { key: 'purchases', label: 'Purchases & Credits', icon: 'receipt' }
+  { key: 'purchases', label: 'Purchases & Credits', icon: 'receipt' },
+  { key: 'reviews', label: 'My Reviews', icon: 'star' }
 ];
 
 function sdRenderSidebar(activeKey) {
@@ -12493,6 +14869,7 @@ var SD_SHELL_MAP = {
   'screen-student-calendar':    ['sdCalendar', 'calendar'],
   'screen-student-bookings':    ['sdBookings', 'bookings'],
   'screen-student-purchases':   ['sdPurch', 'purchases'],
+  'screen-student-reviews':     ['sdRev', 'reviews'],
   'screen-resched':             ['sdResched', 'bookings'],
   'screen-receipt':             ['sdReceipt', 'purchases']
 };
@@ -12502,6 +14879,7 @@ function sdRemount(full){
 }
 function sdInitAll() {
   if (typeof tutorRecountCourses === 'function') tutorRecountCourses();
+  if (typeof v51Init === 'function') v51Init();   /* v51 — ledger, student count, roster audit */
   if (typeof tutorSyncRating === 'function') tutorSyncRating();
   if (typeof applyTutorGuard === 'function') applyTutorGuard();
   if (typeof seedStudentBookings === 'function') seedStudentBookings();
@@ -12512,6 +14890,7 @@ function sdInitAll() {
   sdMountShell('sdDiscussions', 'discussions');
   sdMountShell('sdCalendar', 'calendar');
   sdMountShell('sdBookings', 'bookings');
+  sdMountShell('sdRev', 'reviews');
   sdRenderContinueLearning();
   sdRenderCourseList();
   sdRenderCalendar();
